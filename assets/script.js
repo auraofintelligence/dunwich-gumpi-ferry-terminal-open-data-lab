@@ -96,6 +96,11 @@ function setupPhotoMap() {
   const preview = document.querySelector("[data-photo-preview]");
   const thumbs = document.querySelector("[data-photo-thumbs]");
   const viewer = document.querySelector("[data-pano-viewer]");
+  const selectedCount = document.querySelector("[data-selected-count]");
+  const downloadCurrent = document.querySelector("[data-download-current]");
+  const downloadSelected = document.querySelector("[data-download-selected]");
+  const selectAll = document.querySelector("[data-select-all-panos]");
+  const clearSelection = document.querySelector("[data-clear-panos]");
   const points = window.DUNWICH_GUMPI_PHOTO_POINTS || [];
   if (!map || !preview || !thumbs || !points.length) return;
 
@@ -106,11 +111,45 @@ function setupPhotoMap() {
   const minLon = Math.min(...lons);
   const maxLon = Math.max(...lons);
   let activeId = points[0].id;
+  const selectedIds = new Set();
 
   function project(point) {
     const x = 12 + ((point.lon - minLon) / Math.max(maxLon - minLon, .00001)) * 76;
     const y = 86 - ((point.lat - minLat) / Math.max(maxLat - minLat, .00001)) * 70;
     return { x, y };
+  }
+
+  function downloadFile(url, filename) {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename || "";
+    document.body.append(link);
+    link.click();
+    link.remove();
+  }
+
+  function getActivePoint() {
+    return points.find((point) => point.id === activeId) || points[0];
+  }
+
+  function getSelectedPoints() {
+    return points.filter((point) => selectedIds.has(point.id));
+  }
+
+  function syncSelection() {
+    document.querySelectorAll("[data-photo-select]").forEach((input) => {
+      input.checked = selectedIds.has(input.dataset.photoSelect);
+    });
+    if (selectedCount) {
+      const count = selectedIds.size;
+      selectedCount.textContent = `${count} selected`;
+    }
+  }
+
+  function downloadPointSet(items) {
+    items.forEach((point, index) => {
+      window.setTimeout(() => downloadFile(point.pano, point.downloadName), index * 180);
+    });
   }
 
   function renderActive(point) {
@@ -121,7 +160,7 @@ function setupPhotoMap() {
         <span>360 pano seed</span>
       </figure>
       <h3>${point.title}</h3>
-      <p class="photo-meta">${point.sourceFile} - ${point.lat.toFixed(5)}, ${point.lon.toFixed(5)}</p>
+      <p class="photo-meta">Captured ${point.captureLabel} - ${point.lat.toFixed(5)}, ${point.lon.toFixed(5)}</p>
       <p>${point.notes}</p>
     `;
     if (viewer) {
@@ -153,18 +192,58 @@ function setupPhotoMap() {
     marker.style.top = `${y}%`;
     marker.title = point.title;
     marker.setAttribute("aria-label", `Show ${point.title}`);
+    marker.textContent = point.sequence;
     marker.addEventListener("click", () => renderActive(point));
     map.append(marker);
+
+    const item = document.createElement("div");
+    item.className = "thumb-item";
 
     const thumb = document.createElement("button");
     thumb.type = "button";
     thumb.dataset.photoId = point.id;
-    thumb.innerHTML = `<img src="${point.thumb}" alt="${point.title} thumbnail"><span>${point.id}</span>`;
+    thumb.innerHTML = `<img src="${point.thumb}" alt="${point.title} thumbnail"><span>${point.sequence}</span>`;
     thumb.addEventListener("click", () => renderActive(point));
-    thumbs.append(thumb);
+    item.append(thumb);
+
+    const label = document.createElement("label");
+    label.className = "thumb-select";
+    label.innerHTML = `<input type="checkbox" data-photo-select="${point.id}"> Add`;
+    label.querySelector("input").addEventListener("change", (event) => {
+      if (event.target.checked) {
+        selectedIds.add(point.id);
+      } else {
+        selectedIds.delete(point.id);
+      }
+      syncSelection();
+    });
+    item.append(label);
+    thumbs.append(item);
 
     if (index === 0) renderActive(point);
   });
+
+  downloadCurrent?.addEventListener("click", () => {
+    const point = getActivePoint();
+    downloadFile(point.pano, point.downloadName);
+  });
+
+  downloadSelected?.addEventListener("click", () => {
+    const selected = getSelectedPoints();
+    downloadPointSet(selected.length ? selected : [getActivePoint()]);
+  });
+
+  selectAll?.addEventListener("click", () => {
+    points.forEach((point) => selectedIds.add(point.id));
+    syncSelection();
+  });
+
+  clearSelection?.addEventListener("click", () => {
+    selectedIds.clear();
+    syncSelection();
+  });
+
+  syncSelection();
 }
 
 renderHeader();

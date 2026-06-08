@@ -39,6 +39,17 @@
           </div>
           <aside class="map-side" aria-label="Selected photo">
             <div class="photo-preview" data-photo-preview></div>
+            <div class="download-panel" data-download-panel>
+              <h3>Download 360 images</h3>
+              <p><span data-selected-count>0 selected</span> from the mapped panorama set.</p>
+              <div class="download-actions">
+                <button class="button ghost small-button" type="button" data-download-current>Download current</button>
+                <button class="button ghost small-button" type="button" data-select-all-panos>Select all mapped</button>
+                <button class="button ghost small-button" type="button" data-clear-panos>Clear</button>
+                <button class="button primary small-button" type="button" data-download-selected>Download selected</button>
+                <a class="button ghost small-button" href="assets/downloads/dunwich-gumpi-public-360-panoramas.zip" download>Download full set</a>
+              </div>
+            </div>
             <div class="thumb-list" data-photo-thumbs aria-label="360 photo thumbnails"></div>
           </aside>
         </div>

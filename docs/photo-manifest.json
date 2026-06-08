@@ -16,21 +16,25 @@
     "gps": null
   },
   {
-    "id": "1933",
     "sourceFile": "GS__1933.JPG",
-    "title": "360 site photo 1933",
-    "pano": "assets/panos/pano-1933.webp",
-    "thumb": "assets/panos/thumb-1933.webp",
+    "publicName": "Dunwich Gumpi 360 unmapped reference photo",
+    "captureOrder": null,
+    "captureTimeLocal": "1 January 2016, 12:14 am",
+    "pano": "assets/panos/dunwich-gumpi-360-unmapped-1933.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-unmapped-1933-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-unmapped-1933.webp",
     "width": 5760,
     "height": 2880,
     "gps": null
   },
   {
-    "id": "1934",
     "sourceFile": "GS__1934.JPG",
-    "title": "360 site photo 1934",
-    "pano": "assets/panos/pano-1934.webp",
-    "thumb": "assets/panos/thumb-1934.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 1",
+    "captureOrder": 1,
+    "captureTimeLocal": "7 June 2026, 1:49 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-01.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-01-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-01.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -40,11 +44,13 @@
     }
   },
   {
-    "id": "1935",
     "sourceFile": "GS__1935.JPG",
-    "title": "360 site photo 1935",
-    "pano": "assets/panos/pano-1935.webp",
-    "thumb": "assets/panos/thumb-1935.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 2",
+    "captureOrder": 2,
+    "captureTimeLocal": "7 June 2026, 1:50 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-02.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-02-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-02.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -54,11 +60,13 @@
     }
   },
   {
-    "id": "1936",
     "sourceFile": "GS__1936.JPG",
-    "title": "360 site photo 1936",
-    "pano": "assets/panos/pano-1936.webp",
-    "thumb": "assets/panos/thumb-1936.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 3",
+    "captureOrder": 3,
+    "captureTimeLocal": "7 June 2026, 1:50 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-03.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-03-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-03.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -68,11 +76,13 @@
     }
   },
   {
-    "id": "1937",
     "sourceFile": "GS__1937.JPG",
-    "title": "360 site photo 1937",
-    "pano": "assets/panos/pano-1937.webp",
-    "thumb": "assets/panos/thumb-1937.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 4",
+    "captureOrder": 4,
+    "captureTimeLocal": "7 June 2026, 1:50 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-04.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-04-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-04.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -82,11 +92,13 @@
     }
   },
   {
-    "id": "1938",
     "sourceFile": "GS__1938.JPG",
-    "title": "360 site photo 1938",
-    "pano": "assets/panos/pano-1938.webp",
-    "thumb": "assets/panos/thumb-1938.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 5",
+    "captureOrder": 5,
+    "captureTimeLocal": "7 June 2026, 1:51 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-05.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-05-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-05.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -96,11 +108,13 @@
     }
   },
   {
-    "id": "1939",
     "sourceFile": "GS__1939.JPG",
-    "title": "360 site photo 1939",
-    "pano": "assets/panos/pano-1939.webp",
-    "thumb": "assets/panos/thumb-1939.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 6",
+    "captureOrder": 6,
+    "captureTimeLocal": "7 June 2026, 1:52 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-06.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-06-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-06.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -110,11 +124,13 @@
     }
   },
   {
-    "id": "1940",
     "sourceFile": "GS__1940.JPG",
-    "title": "360 site photo 1940",
-    "pano": "assets/panos/pano-1940.webp",
-    "thumb": "assets/panos/thumb-1940.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 7",
+    "captureOrder": 7,
+    "captureTimeLocal": "7 June 2026, 1:52 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-07.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-07-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-07.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -124,11 +140,13 @@
     }
   },
   {
-    "id": "1941",
     "sourceFile": "GS__1941.JPG",
-    "title": "360 site photo 1941",
-    "pano": "assets/panos/pano-1941.webp",
-    "thumb": "assets/panos/thumb-1941.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 8",
+    "captureOrder": 8,
+    "captureTimeLocal": "7 June 2026, 1:53 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-08.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-08-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-08.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -138,11 +156,13 @@
     }
   },
   {
-    "id": "1942",
     "sourceFile": "GS__1942.JPG",
-    "title": "360 site photo 1942",
-    "pano": "assets/panos/pano-1942.webp",
-    "thumb": "assets/panos/thumb-1942.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 9",
+    "captureOrder": 9,
+    "captureTimeLocal": "7 June 2026, 1:53 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-09.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-09-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-09.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -152,11 +172,13 @@
     }
   },
   {
-    "id": "1943",
     "sourceFile": "GS__1943.JPG",
-    "title": "360 site photo 1943",
-    "pano": "assets/panos/pano-1943.webp",
-    "thumb": "assets/panos/thumb-1943.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 10",
+    "captureOrder": 10,
+    "captureTimeLocal": "7 June 2026, 1:54 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-10.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-10-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-10.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -166,11 +188,13 @@
     }
   },
   {
-    "id": "1944",
     "sourceFile": "GS__1944.JPG",
-    "title": "360 site photo 1944",
-    "pano": "assets/panos/pano-1944.webp",
-    "thumb": "assets/panos/thumb-1944.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 11",
+    "captureOrder": 11,
+    "captureTimeLocal": "7 June 2026, 1:54 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-11.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-11-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-11.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -180,11 +204,13 @@
     }
   },
   {
-    "id": "1945",
     "sourceFile": "GS__1945.JPG",
-    "title": "360 site photo 1945",
-    "pano": "assets/panos/pano-1945.webp",
-    "thumb": "assets/panos/thumb-1945.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 12",
+    "captureOrder": 12,
+    "captureTimeLocal": "7 June 2026, 1:55 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-12.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-12-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-12.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -194,11 +220,13 @@
     }
   },
   {
-    "id": "1946",
     "sourceFile": "GS__1946.JPG",
-    "title": "360 site photo 1946",
-    "pano": "assets/panos/pano-1946.webp",
-    "thumb": "assets/panos/thumb-1946.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 13",
+    "captureOrder": 13,
+    "captureTimeLocal": "7 June 2026, 1:55 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-13.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-13-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-13.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -208,11 +236,13 @@
     }
   },
   {
-    "id": "1947",
     "sourceFile": "GS__1947.JPG",
-    "title": "360 site photo 1947",
-    "pano": "assets/panos/pano-1947.webp",
-    "thumb": "assets/panos/thumb-1947.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 14",
+    "captureOrder": 14,
+    "captureTimeLocal": "7 June 2026, 1:56 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-14.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-14-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-14.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -222,11 +252,13 @@
     }
   },
   {
-    "id": "1948",
     "sourceFile": "GS__1948.JPG",
-    "title": "360 site photo 1948",
-    "pano": "assets/panos/pano-1948.webp",
-    "thumb": "assets/panos/thumb-1948.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 15",
+    "captureOrder": 15,
+    "captureTimeLocal": "7 June 2026, 1:57 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-15.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-15-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-15.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -236,11 +268,13 @@
     }
   },
   {
-    "id": "1949",
     "sourceFile": "GS__1949.JPG",
-    "title": "360 site photo 1949",
-    "pano": "assets/panos/pano-1949.webp",
-    "thumb": "assets/panos/thumb-1949.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 16",
+    "captureOrder": 16,
+    "captureTimeLocal": "7 June 2026, 1:57 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-16.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-16-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-16.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -250,11 +284,13 @@
     }
   },
   {
-    "id": "1950",
     "sourceFile": "GS__1950.JPG",
-    "title": "360 site photo 1950",
-    "pano": "assets/panos/pano-1950.webp",
-    "thumb": "assets/panos/thumb-1950.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 17",
+    "captureOrder": 17,
+    "captureTimeLocal": "7 June 2026, 1:58 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-17.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-17-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-17.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -264,11 +300,13 @@
     }
   },
   {
-    "id": "1951",
     "sourceFile": "GS__1951.JPG",
-    "title": "360 site photo 1951",
-    "pano": "assets/panos/pano-1951.webp",
-    "thumb": "assets/panos/thumb-1951.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 18",
+    "captureOrder": 18,
+    "captureTimeLocal": "7 June 2026, 1:59 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-18.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-18-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-18.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -278,11 +316,13 @@
     }
   },
   {
-    "id": "1952",
     "sourceFile": "GS__1952.JPG",
-    "title": "360 site photo 1952",
-    "pano": "assets/panos/pano-1952.webp",
-    "thumb": "assets/panos/thumb-1952.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 19",
+    "captureOrder": 19,
+    "captureTimeLocal": "7 June 2026, 1:59 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-19.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-19-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-19.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -292,11 +332,13 @@
     }
   },
   {
-    "id": "1953",
     "sourceFile": "GS__1953.JPG",
-    "title": "360 site photo 1953",
-    "pano": "assets/panos/pano-1953.webp",
-    "thumb": "assets/panos/thumb-1953.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 20",
+    "captureOrder": 20,
+    "captureTimeLocal": "7 June 2026, 2:00 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-20.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-20-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-20.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -306,11 +348,13 @@
     }
   },
   {
-    "id": "1954",
     "sourceFile": "GS__1954.JPG",
-    "title": "360 site photo 1954",
-    "pano": "assets/panos/pano-1954.webp",
-    "thumb": "assets/panos/thumb-1954.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 21",
+    "captureOrder": 21,
+    "captureTimeLocal": "7 June 2026, 2:00 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-21.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-21-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-21.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -320,11 +364,13 @@
     }
   },
   {
-    "id": "1955",
     "sourceFile": "GS__1955.JPG",
-    "title": "360 site photo 1955",
-    "pano": "assets/panos/pano-1955.webp",
-    "thumb": "assets/panos/thumb-1955.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 22",
+    "captureOrder": 22,
+    "captureTimeLocal": "7 June 2026, 2:00 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-22.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-22-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-22.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -334,11 +380,13 @@
     }
   },
   {
-    "id": "1956",
     "sourceFile": "GS__1956.JPG",
-    "title": "360 site photo 1956",
-    "pano": "assets/panos/pano-1956.webp",
-    "thumb": "assets/panos/thumb-1956.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 23",
+    "captureOrder": 23,
+    "captureTimeLocal": "7 June 2026, 2:01 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-23.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-23-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-23.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -348,11 +396,13 @@
     }
   },
   {
-    "id": "1957",
     "sourceFile": "GS__1957.JPG",
-    "title": "360 site photo 1957",
-    "pano": "assets/panos/pano-1957.webp",
-    "thumb": "assets/panos/thumb-1957.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 24",
+    "captureOrder": 24,
+    "captureTimeLocal": "7 June 2026, 2:01 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-24.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-24-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-24.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -362,11 +412,13 @@
     }
   },
   {
-    "id": "1958",
     "sourceFile": "GS__1958.JPG",
-    "title": "360 site photo 1958",
-    "pano": "assets/panos/pano-1958.webp",
-    "thumb": "assets/panos/thumb-1958.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 25",
+    "captureOrder": 25,
+    "captureTimeLocal": "7 June 2026, 2:02 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-25.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-25-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-25.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -376,11 +428,13 @@
     }
   },
   {
-    "id": "1959",
     "sourceFile": "GS__1959.JPG",
-    "title": "360 site photo 1959",
-    "pano": "assets/panos/pano-1959.webp",
-    "thumb": "assets/panos/thumb-1959.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 26",
+    "captureOrder": 26,
+    "captureTimeLocal": "7 June 2026, 2:03 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-26.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-26-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-26.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -390,11 +444,13 @@
     }
   },
   {
-    "id": "1960",
     "sourceFile": "GS__1960.JPG",
-    "title": "360 site photo 1960",
-    "pano": "assets/panos/pano-1960.webp",
-    "thumb": "assets/panos/thumb-1960.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 27",
+    "captureOrder": 27,
+    "captureTimeLocal": "7 June 2026, 2:04 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-27.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-27-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-27.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -404,11 +460,13 @@
     }
   },
   {
-    "id": "1961",
     "sourceFile": "GS__1961.JPG",
-    "title": "360 site photo 1961",
-    "pano": "assets/panos/pano-1961.webp",
-    "thumb": "assets/panos/thumb-1961.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 28",
+    "captureOrder": 28,
+    "captureTimeLocal": "7 June 2026, 2:04 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-28.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-28-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-28.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -418,11 +476,13 @@
     }
   },
   {
-    "id": "1962",
     "sourceFile": "GS__1962.JPG",
-    "title": "360 site photo 1962",
-    "pano": "assets/panos/pano-1962.webp",
-    "thumb": "assets/panos/thumb-1962.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 29",
+    "captureOrder": 29,
+    "captureTimeLocal": "7 June 2026, 2:05 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-29.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-29-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-29.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -432,11 +492,13 @@
     }
   },
   {
-    "id": "1963",
     "sourceFile": "GS__1963.JPG",
-    "title": "360 site photo 1963",
-    "pano": "assets/panos/pano-1963.webp",
-    "thumb": "assets/panos/thumb-1963.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 30",
+    "captureOrder": 30,
+    "captureTimeLocal": "7 June 2026, 2:05 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-30.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-30-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-30.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -446,11 +508,13 @@
     }
   },
   {
-    "id": "1964",
     "sourceFile": "GS__1964.JPG",
-    "title": "360 site photo 1964",
-    "pano": "assets/panos/pano-1964.webp",
-    "thumb": "assets/panos/thumb-1964.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 31",
+    "captureOrder": 31,
+    "captureTimeLocal": "7 June 2026, 2:06 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-31.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-31-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-31.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -460,11 +524,13 @@
     }
   },
   {
-    "id": "1965",
     "sourceFile": "GS__1965.JPG",
-    "title": "360 site photo 1965",
-    "pano": "assets/panos/pano-1965.webp",
-    "thumb": "assets/panos/thumb-1965.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 32",
+    "captureOrder": 32,
+    "captureTimeLocal": "7 June 2026, 2:06 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-32.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-32-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-32.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
@@ -474,11 +540,13 @@
     }
   },
   {
-    "id": "1966",
     "sourceFile": "GS__1966.JPG",
-    "title": "360 site photo 1966",
-    "pano": "assets/panos/pano-1966.webp",
-    "thumb": "assets/panos/thumb-1966.webp",
+    "publicName": "Dunwich Gumpi 360 map photo 33",
+    "captureOrder": 33,
+    "captureTimeLocal": "7 June 2026, 2:07 pm",
+    "pano": "assets/panos/dunwich-gumpi-360-33.webp",
+    "thumb": "assets/panos/dunwich-gumpi-360-33-thumb.webp",
+    "downloadName": "dunwich-gumpi-360-33.webp",
     "width": 5760,
     "height": 2880,
     "gps": {
