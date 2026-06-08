@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Next data ladder for drone footage, photogrammetry, LiDAR point clouds and official source files for the Dunwich (Gumpi) Ferry Terminal Open Data Lab.">
+    <title>Drone + LiDAR Data Ladder | Dunwich (Gumpi) Ferry Terminal Open Data Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Nunito+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  </head>
+  <body data-page="data">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" data-site-header></header>
+    <main id="main">
+      <section class="page-hero" id="top" aria-labelledby="page-title">
+        <div>
+          <span class="section-label">Drone + LiDAR next</span>
+          <h1 id="page-title">Today’s 360 photos are the first rung, not the final model.</h1>
+          <p class="lede">The next step is a data ladder: better capture, better reconstruction, better public review, and better requests for official source files.</p>
+        </div>
+        <figure class="media-card">
+          <img src="assets/panos/thumb-1948.webp" alt="360-photo thumbnail from a sandy ferry terminal site area">
+          <figcaption>Community capture can start the conversation, then professional data can tighten it.</figcaption>
+        </figure>
+      </section>
+
+      <section class="section" aria-labelledby="ladder-title">
+        <div class="section-heading">
+          <span class="section-label">Data ladder</span>
+          <h2 id="ladder-title">Grow the evidence without jumping straight to expensive survey work.</h2>
+        </div>
+        <div class="method-list">
+          <article class="method-item"><div><h3>Level A: phone and 360 photos</h3><p>Current layer. Good for visual orientation, prompt seeds, public memory and identifying questions.</p></div></article>
+          <article class="method-item"><div><h3>Level B: drone stills and short video</h3><p>Next layer. Useful for current layout, rooflines, circulation, vegetation and construction-impact discussion. Must follow CASA rules and local permissions.</p></div></article>
+          <article class="method-item"><div><h3>Level C: photogrammetry and gaussian splats</h3><p>Use overlapping photos/video to reconstruct a navigable space. Good for world builders and visual review, less reliable for hard measurement unless controlled carefully.</p></div></article>
+          <article class="method-item"><div><h3>Level D: LiDAR and point clouds</h3><p>Use official/open LiDAR or commissioned scans for terrain, levels, surfaces, clearance, drainage, vegetation and engineering discussions.</p></div></article>
+          <article class="method-item"><div><h3>Level E: public data room</h3><p>Publish safe source files, licence, coordinate system, capture dates, accuracy notes, derived meshes, issue logs and community simulations.</p></div></article>
+        </div>
+      </section>
+
+      <section class="section accent-band" aria-labelledby="safe-title">
+        <div class="wide-copy">
+          <span class="section-label">Drone capture boundary</span>
+          <h2 id="safe-title">Drone work needs boring safety discipline.</h2>
+          <p>Before flying, check CASA rules, airspace, people, roads, privacy, permissions, wildlife, cultural sensitivity, weather and whether the capture is recreational, volunteer, paid or organisational work. When in doubt, get a qualified drone operator.</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card"><h3>CASA drone rules</h3><p>Use CASA as the authority for drone rules, registration and operator requirements.</p><a href="https://www.casa.gov.au/drones">Open CASA drones page</a></article>
+          <article class="source-card"><h3>Drone safety apps</h3><p>CASA points people to verified apps to check where they can and cannot fly.</p><a href="https://www.casa.gov.au/drones">Check CASA guidance</a></article>
+          <article class="source-card"><h3>Capture log</h3><p>Record date, time, operator, purpose, weather, area, permissions, files captured and what should not be published.</p><a href="docs/capture-log-template.md">Open capture template</a></article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="point-cloud-title">
+        <div class="section-heading">
+          <span class="section-label">Point-cloud sources</span>
+          <h2 id="point-cloud-title">Look for existing open elevation data before commissioning new work.</h2>
+        </div>
+        <div class="source-grid">
+          <article class="source-card"><h3>Geoscience Australia ELVIS</h3><p>ELVIS helps discover and obtain Australian elevation and bathymetry data from participating government agencies.</p><a href="https://www.ga.gov.au/scientific-topics/national-location-information/digital-elevation-data">Open elevation data page</a></article>
+          <article class="source-card"><h3>Queensland Open Data</h3><p>Queensland publishes open datasets and data request pathways, including spatial data routes.</p><a href="https://www.data.qld.gov.au/">Open Queensland data portal</a></article>
+          <article class="source-card"><h3>QSpatial</h3><p>Queensland’s spatial data pathway for mapping data, imagery and related downloads.</p><a href="https://www.business.qld.gov.au/running-business/support-services/mapping-data-imagery/data/qspatial">Open QSpatial</a></article>
+        </div>
+      </section>
+
+      <div class="sequence-wrap" data-sequence-nav></div>
+    </main>
+    <footer class="site-footer" data-site-footer></footer>
+    <button class="to-top" type="button" data-to-top aria-label="Back to top">Top</button>
+    <script src="assets/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Dunwich Gumpi Open Data Lab favicon">
+  <rect width="256" height="256" rx="42" fill="#0d3340"/>
+  <path d="M34 160c37-44 71-48 105-20 25 21 47 18 83-30" fill="none" stroke="#e8b84d" stroke-width="18" stroke-linecap="round"/>
+  <path d="M43 91c38-22 73-24 105-8 23 12 43 10 65-7" fill="none" stroke="#5aa27a" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="80" cy="173" r="15" fill="#ffffff"/>
+  <circle cx="137" cy="132" r="15" fill="#ffffff"/>
+  <circle cx="189" cy="119" r="15" fill="#ffffff"/>
+  <text x="128" y="219" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="48" fill="#ffffff">DG</text>
+</svg>

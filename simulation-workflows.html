@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Step-by-step simulation workflows for Dunwich (Gumpi) Ferry Terminal community design ideas.">
+    <title>Simulation Workflows | Dunwich (Gumpi) Ferry Terminal Open Data Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Nunito+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  </head>
+  <body data-page="simulate">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" data-site-header></header>
+    <main id="main">
+      <section class="page-hero" id="top" aria-labelledby="page-title">
+        <div>
+          <span class="section-label">Simulation workflow</span>
+          <h1 id="page-title">A simple loop: evidence, design, simulate, review, share.</h1>
+          <p class="lede">This page starts from the 360-photo set already in this repo. The next capture layer is drone footage, LiDAR point clouds and official source files.</p>
+        </div>
+        <figure class="media-card">
+          <img src="assets/images/terminal-foreshore-card.webp" alt="Foreshore track and ferry terminal approach area from the 360-photo intake">
+          <figcaption>The existing 360-photo intake is enough for first-pass public simulation prompts. It is not enough for engineering decisions.</figcaption>
+        </figure>
+      </section>
+
+      <section class="section" aria-labelledby="loop-title">
+        <div class="section-heading">
+          <span class="section-label">Player loop</span>
+          <h2 id="loop-title">The repeatable public method.</h2>
+        </div>
+        <div class="method-list">
+          <article class="method-item"><div><h3>Evidence</h3><p>Start with the 360 photos already loaded in this repo, plus the hall display photos, notes and official source links. Use future capture time for drone footage, LiDAR point clouds and missing official files.</p></div></article>
+          <article class="method-item"><div><h3>Design</h3><p>Choose one design lane: transport, shade, culture, ecology, local enterprise or maker-space R&D. Write the idea in plain words.</p></div></article>
+          <article class="method-item"><div><h3>Simulate</h3><p>Use an image model, world builder, Meshy-style asset tool or Blender scene to make a visual draft.</p></div></article>
+          <article class="method-item"><div><h3>Review</h3><p>Ask what is wrong, missing, unsafe, culturally sensitive, technically impossible or worth exploring.</p></div></article>
+          <article class="method-item"><div><h3>Share</h3><p>Publish only the public-safe version: source links, image/model, status label, review notes and the next question.</p></div></article>
+        </div>
+      </section>
+
+      <section class="section accent-band" aria-labelledby="tracks-title">
+        <div class="wide-copy">
+          <span class="section-label">Workflow tracks</span>
+          <h2 id="tracks-title">Pick the right track for the idea.</h2>
+        </div>
+        <div class="scenario-grid">
+          <article class="scenario-card"><h3>Fast image mock-up</h3><p>Use one 360 photo or display-board crop as reference, then ask for a clearly labelled concept image. Best for shade, seating, signage, public screen and arrival-feel ideas.</p></article>
+          <article class="scenario-card"><h3>World-builder scene</h3><p>Use World Labs Marble or a similar world tool when people need to move through a place. Best for arrival routes, waiting zones and how a design feels from eye height.</p></article>
+          <article class="scenario-card"><h3>3D asset generation</h3><p>Use Meshy-style tools for objects: benches, shelters, signs, kiosks, shade modules, small retail pods, railings, block prototypes or art objects.</p></article>
+          <article class="scenario-card"><h3>Blender review file</h3><p>Use Blender when outputs need to be placed, scaled, cleaned, exported, annotated or handed to someone technical for better review.</p></article>
+          <article class="scenario-card"><h3>Photogrammetry and splats</h3><p>Use phone/drone footage with Scaniverse, Polycam, RealityScan or similar tools when the goal is a spatial scan rather than an invented design.</p></article>
+          <article class="scenario-card"><h3>LiDAR point-cloud track</h3><p>Use LiDAR when the community needs terrain, levels, dimensions and constraints. This is where official release or funded survey work matters most.</p></article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="prompt-title">
+        <div class="section-heading">
+          <span class="section-label">Starter prompts</span>
+          <h2 id="prompt-title">Copy the structure, then swap the details.</h2>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card"><h3>360-to-world prompt</h3><p>Create an explorable 3D world from this 360 panorama of the Dunwich (Gumpi) ferry terminal area. Preserve the ground plane, horizon, vegetation and ferry-gateway feeling. Add only clearly labelled concept elements: shade, seating, safer pedestrian line, public information screen. Avoid official logos, fake approvals and sensitive cultural claims.</p></article>
+          <article class="prompt-card"><h3>Asset prompt</h3><p>Create a low-poly public information kiosk for an island ferry terminal. It should be weather-resistant, readable in sun, accessible from a wheelchair, and suitable for local event notices, ferry updates and emergency fallback. Export as GLB for Blender review.</p></article>
+          <article class="prompt-card"><h3>Drone brief</h3><p>Capture nadir and oblique video over the public terminal study area, following CASA rules and local permissions. Deliver MP4, still frames, camera path notes and a public-safe capture log. Do not fly over crowds or expose private property details.</p></article>
+          <article class="prompt-card"><h3>LiDAR request</h3><p>Please provide public-safe LiDAR point cloud, ground survey and CAD/GIS reference files for the Dunwich (Gumpi) Ferry Terminal Upgrade consultation area, with licence, coordinate system, capture date and accuracy notes.</p></article>
+        </div>
+      </section>
+
+      <div class="sequence-wrap" data-sequence-nav></div>
+    </main>
+    <footer class="site-footer" data-site-footer></footer>
+    <button class="to-top" type="button" data-to-top aria-label="Back to top">Top</button>
+    <script src="assets/script.js"></script>
+  </body>
+</html>

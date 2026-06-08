@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Tool spectrum for Meshy, World Labs Marble, Scaniverse, Polycam, RealityScan and Blender workflows.">
+    <title>Tools | Dunwich (Gumpi) Ferry Terminal Open Data Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Nunito+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  </head>
+  <body data-page="tools">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" data-site-header></header>
+    <main id="main">
+      <section class="page-hero" id="top" aria-labelledby="page-title">
+        <div>
+          <span class="section-label">Tool spectrum</span>
+          <h1 id="page-title">Use the right tool for the right kind of public idea.</h1>
+          <p class="lede">This page is a current tool map, not a locked stack. Tools will change quickly, so source links matter.</p>
+        </div>
+        <figure class="media-card">
+          <img src="assets/panos/thumb-1944.webp" alt="360-photo thumbnail from the Dunwich ferry terminal area">
+          <figcaption>Real site inputs make generated outputs easier to challenge.</figcaption>
+        </figure>
+      </section>
+
+      <section class="section" aria-labelledby="tools-title">
+        <div class="section-heading">
+          <span class="section-label">Practical tool roles</span>
+          <h2 id="tools-title">Do not ask one tool to do every job.</h2>
+        </div>
+        <div class="tool-grid">
+          <article class="tool-card"><h3>World Labs Marble</h3><p>Useful for creating persistent 3D worlds from text, images, video, panoramas or coarse 3D structures. Best for walkthrough feeling and spatial imagination.</p><a href="https://docs.worldlabs.ai/">World Labs docs</a></article>
+          <article class="tool-card"><h3>Meshy</h3><p>Useful for text-to-3D and image-to-3D assets, then exporting formats such as GLB/OBJ/FBX depending on the task. Best for objects, fixtures and prototype parts.</p><a href="https://docs.meshy.ai/en/api/text-to-3d">Meshy text-to-3D docs</a></article>
+          <article class="tool-card"><h3>Blender</h3><p>Useful as the open workbench for importing GLB/glTF/OBJ assets, placing objects, checking scale, cleaning meshes and exporting review files.</p><a href="https://docs.blender.org/manual/en/latest/addons/import_export/scene_gltf2.html">Blender glTF docs</a></article>
+          <article class="tool-card"><h3>Scaniverse</h3><p>Useful for phone-based 3D scanning, gaussian splats and meshes, especially early capture of spaces and objects.</p><a href="https://www.nianticspatial.com/en/products/scaniverse">Scaniverse</a></article>
+          <article class="tool-card"><h3>Polycam</h3><p>Useful for photogrammetry, LiDAR-capable phone workflows and export experiments, with paid export limits to check.</p><a href="https://learn.poly.cam/hc/en-us/articles/27756102599572-What-File-Types-Can-Polycam-Export">Polycam export formats</a></article>
+          <article class="tool-card"><h3>RealityScan</h3><p>Useful for photogrammetry from image sets and laser scan workflows where a more dedicated reconstruction path is needed.</p><a href="https://www.realityscan.com/">RealityScan</a></article>
+        </div>
+      </section>
+
+      <section class="section accent-band" aria-labelledby="matrix-title">
+        <div class="wide-copy">
+          <span class="section-label">Decision matrix</span>
+          <h2 id="matrix-title">Simple rule: image for feeling, world for walking, mesh for objects, point cloud for measurement.</h2>
+        </div>
+        <div class="scenario-grid">
+          <article class="scenario-card"><h3>Canopy idea</h3><p>Start with image mock-up. If it survives review, make simple GLB objects and place them in Blender.</p></article>
+          <article class="scenario-card"><h3>Arrival route</h3><p>Start with World Labs/Marble-style world generation from a panorama, then compare with real walking footage.</p></article>
+          <article class="scenario-card"><h3>Information kiosk</h3><p>Start in Meshy or Blender as an asset. Then test placement, visibility, wheelchair access and maintenance needs.</p></article>
+          <article class="scenario-card"><h3>Drainage, levels and clearance</h3><p>Skip pretty mock-ups. Ask for LiDAR, survey, CAD/GIS and qualified review.</p></article>
+        </div>
+      </section>
+
+      <div class="sequence-wrap" data-sequence-nav></div>
+    </main>
+    <footer class="site-footer" data-site-footer></footer>
+    <button class="to-top" type="button" data-to-top aria-label="Back to top">Top</button>
+    <script src="assets/script.js"></script>
+  </body>
+</html>
