@@ -279,6 +279,61 @@ h3,
   color: var(--sun);
 }
 
+.home-video-band {
+  width: 100%;
+  padding: clamp(3.5rem, 7vw, 6rem) 1.25rem;
+  background:
+    linear-gradient(110deg, rgba(13, 51, 64, .96), rgba(17, 106, 123, .84)),
+    var(--deep);
+  color: var(--white);
+}
+
+.home-video-layout {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(320px, 1.18fr);
+  gap: clamp(1.5rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.home-video-copy {
+  max-width: 560px;
+}
+
+.home-video-copy h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(2.4rem, 5vw, 5.2rem);
+  line-height: .95;
+}
+
+.home-video-copy p {
+  margin: 0 0 1.35rem;
+  color: rgba(255, 255, 255, .84);
+  font-size: clamp(1.02rem, 1.5vw, 1.18rem);
+}
+
+.home-video-band .section-label {
+  color: var(--sun);
+}
+
+.youtube-frame {
+  padding: .55rem;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: var(--radius);
+  background: #050607;
+  box-shadow: 0 28px 58px rgba(0, 0, 0, .26);
+}
+
+.youtube-frame iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: calc(var(--radius) - 2px);
+  background: #000;
+}
+
 .section,
 .page-hero {
   width: min(1180px, calc(100% - 2.5rem));
@@ -1047,7 +1102,8 @@ h3,
 
   .page-hero,
   .map-layout,
-  .song-video-layout {
+  .song-video-layout,
+  .home-video-layout {
     grid-template-columns: 1fr;
   }
 
