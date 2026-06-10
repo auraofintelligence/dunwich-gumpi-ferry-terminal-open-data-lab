@@ -292,7 +292,7 @@ h3,
   width: min(1180px, 100%);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, .82fr) minmax(320px, 1.18fr);
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
   gap: clamp(1.5rem, 5vw, 4rem);
   align-items: center;
 }
@@ -317,21 +317,13 @@ h3,
   color: var(--sun);
 }
 
-.youtube-frame {
-  padding: .55rem;
-  border: 1px solid rgba(255, 255, 255, .22);
-  border-radius: var(--radius);
-  background: #050607;
-  box-shadow: 0 28px 58px rgba(0, 0, 0, .26);
+.phone-frame.home-phone-frame {
+  width: min(100%, 400px);
+  box-shadow: 0 34px 72px rgba(0, 0, 0, .34);
 }
 
-.youtube-frame iframe {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border: 0;
-  border-radius: calc(var(--radius) - 2px);
-  background: #000;
+.home-phone-frame .home-portrait-video {
+  object-fit: cover;
 }
 
 .section,
