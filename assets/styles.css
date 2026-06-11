@@ -578,14 +578,18 @@ h3,
 }
 
 .evidence-workspace-section {
-  width: min(1760px, calc(100% - 2.5rem));
+  width: min(1880px, calc(100% - 1.25rem));
 }
 
 .evidence-workspace {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
-  gap: clamp(1rem, 1.6vw, 1.5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 400px);
+  gap: clamp(.9rem, 1.35vw, 1.35rem);
   align-items: start;
+}
+
+.idea-workbench {
+  grid-column: 1 / -1;
 }
 
 .evidence-map-column {
@@ -1007,18 +1011,6 @@ h3,
   padding: 1rem;
 }
 
-.viewer-toolbelt {
-  display: grid;
-  grid-template-columns: minmax(270px, .42fr) minmax(0, 1fr);
-  gap: 1rem;
-  margin-top: 1rem;
-  align-items: start;
-}
-
-.compact-pipeline {
-  height: 100%;
-}
-
 .pano-pipeline h4 {
   margin: 0 0 .55rem;
   font-size: 1.05rem;
@@ -1044,6 +1036,22 @@ h3,
   padding: 1rem;
 }
 
+.idea-workbench-panel {
+  display: grid;
+  grid-template-columns: minmax(230px, .24fr) minmax(0, 1fr);
+  gap: 1rem;
+  padding: clamp(1rem, 1.6vw, 1.35rem);
+  background: var(--deep);
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: var(--radius);
+  box-shadow: 0 28px 60px rgba(13, 51, 64, .18);
+}
+
+.viewer-buttons {
+  margin-top: 1rem;
+}
+
 .idea-prompt-form {
   margin-top: 1rem;
   padding: 1rem;
@@ -1064,8 +1072,12 @@ h3,
   padding: 0;
   border: 0;
   background: transparent;
-  grid-template-columns: minmax(240px, .52fr) minmax(0, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: .85rem;
+}
+
+.idea-prompt-form .lane-select-label {
+  grid-column: span 2;
 }
 
 .idea-prompt-form label span,
@@ -1115,7 +1127,7 @@ h3,
   background: #f7fbf8;
 }
 
-.prompt-drawer [data-design-idea] {
+.prompt-drawer [data-design-build] {
   min-height: 150px;
 }
 
@@ -1397,7 +1409,7 @@ h3,
   .page-hero,
   .map-layout,
   .evidence-workspace,
-  .viewer-toolbelt,
+  .idea-workbench-panel,
   .pano-workbench,
   .song-video-layout,
   .home-video-layout {
@@ -1411,6 +1423,30 @@ h3,
   .scenario-grid,
   .prompt-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 941px) and (max-width: 1180px) {
+  .evidence-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .idea-workbench-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .evidence-map-column {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+  }
+
+  .evidence-map-column .download-panel,
+  .evidence-map-column .thumb-drawer {
+    grid-column: 2;
+  }
+
+  .evidence-map-column .photo-preview {
+    grid-column: 1;
+    grid-row: 2 / span 2;
   }
 }
 
@@ -1460,6 +1496,13 @@ h3,
   .idea-prompt-form,
   .prompt-drawer .idea-prompt-form {
     grid-template-columns: 1fr;
+  }
+
+  .idea-prompt-form .lane-select-label,
+  .evidence-map-column .photo-preview,
+  .evidence-map-column .download-panel,
+  .evidence-map-column .thumb-drawer {
+    grid-column: auto;
   }
 
   .pano-scroll img {

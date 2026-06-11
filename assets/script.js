@@ -140,6 +140,7 @@ function setupPhotoMap() {
   const preview = document.querySelector("[data-photo-preview]");
   const thumbs = document.querySelector("[data-photo-thumbs]");
   const viewer = document.querySelector("[data-pano-viewer]");
+  const ideaWorkbench = document.querySelector("[data-idea-workbench]");
   const selectedCount = document.querySelector("[data-selected-count]");
   const downloadCurrent = document.querySelector("[data-download-current]");
   const downloadSelected = document.querySelector("[data-download-selected]");
@@ -239,7 +240,7 @@ function setupPhotoMap() {
   }
 
   function setWorkflowStatus(message) {
-    const status = viewer?.querySelector("[data-workflow-status]");
+    const status = ideaWorkbench?.querySelector("[data-workflow-status]") || viewer?.querySelector("[data-workflow-status]");
     if (status) status.textContent = message;
   }
 
@@ -253,15 +254,15 @@ function setupPhotoMap() {
   }
 
   function buildGeneratorPrompt(point) {
-    const focusSelect = viewer?.querySelector("[data-design-focus]");
+    const focusSelect = ideaWorkbench?.querySelector("[data-design-focus]");
     const focus = focusSelect?.value || "an open community design idea";
     const focusLabel = focusSelect?.selectedOptions?.[0]?.textContent.trim() || focus;
-    const extraLane = viewer?.querySelector("[data-design-extra]")?.value.trim() || "";
-    const noticed = viewer?.querySelector("[data-design-notice]")?.value.trim() || "";
-    const idea = viewer?.querySelector("[data-design-idea]")?.value.trim() || "";
-    const people = viewer?.querySelector("[data-design-people]")?.value.trim() || "";
-    const notes = viewer?.querySelector("[data-design-notes]")?.value.trim() || "";
-    const hasAnyAnswer = extraLane || noticed || idea || people || notes;
+    const extraLane = ideaWorkbench?.querySelector("[data-design-extra]")?.value.trim() || "";
+    const problem = ideaWorkbench?.querySelector("[data-design-problem]")?.value.trim() || "";
+    const build = ideaWorkbench?.querySelector("[data-design-build]")?.value.trim() || "";
+    const users = ideaWorkbench?.querySelector("[data-design-users]")?.value.trim() || "";
+    const look = ideaWorkbench?.querySelector("[data-design-look]")?.value.trim() || "";
+    const hasAnyAnswer = extraLane || problem || build || users || look;
     const customLaneSelected = focus === "another community idea not named in the current concept design";
     const lane = extraLane
       ? customLaneSelected
@@ -271,34 +272,36 @@ function setupPhotoMap() {
 
     if (!hasAnyAnswer) {
       return [
-        `Use the attached saved view from ${point.title} as the real site reference.`,
-        "Before generating an image, ask me five quick questions:",
-        "1. What caught your eye in this exact view?",
-        "2. Does one of the 17 concept-design markers fit, or would you name another lane?",
-        "3. What would you change, add, remove, move or protect here?",
-        "4. Who should this help, and what should feel better for them?",
-        "5. What must stay recognisable from the real place?",
-        "After I answer, turn my words into a clearly labelled concept overlay for community discussion."
+        `Use the attached saved view from ${point.title} as the source photo.`,
+        "Treat the current photo as a mostly blank, overgrown terminal site for a future infrastructure concept.",
+        "Before generating an image, ask me five plain design questions:",
+        "1. Which numbered project lane fits, or should we add a new community lane?",
+        "2. What everyday terminal problem should this idea solve?",
+        "3. What should be built, moved, added or tested on this blank site?",
+        "4. Who would use it, and at what time of day, season or ferry rush?",
+        "5. What style, materials, scale or hard site limits should guide the concept?",
+        "After I answer, turn my words into a clearly labelled future-infrastructure concept image for community vision-boarding."
       ].join("\n");
     }
 
     return [
-      `Use the attached saved view from ${point.title} as the real site reference.`,
+      `Use the attached saved view from ${point.title} as the source photo.`,
+      "Treat the current photo as a mostly blank, overgrown ex-sandmining terminal site. It is a starting pad for future infrastructure, not something to preserve as-is.",
       `Help me visualise my own idea in the ${lane}.`,
       "My answers:",
       `- Starting lane: ${focusLabel} - ${focus}`,
       `- Extra lane or missing issue: ${responseOrQuestion(extraLane, "If this does not fit the current concept-design list, what lane name would you add?")}`,
-      `- What I noticed: ${responseOrQuestion(noticed, "What caught your eye in this exact view?")}`,
-      `- What I want to try: ${responseOrQuestion(idea, "What would you change, add, remove, move or protect here?")}`,
-      `- Who it should help: ${responseOrQuestion(people, "Who should this help, and what should feel better for them?")}`,
-      `- What should stay recognisable: ${responseOrQuestion(notes, "What must stay recognisable from the real place?")}`,
+      `- Problem to solve: ${responseOrQuestion(problem, "What everyday terminal problem should this idea solve?")}`,
+      `- Build or test: ${responseOrQuestion(build, "What should be built, moved, added or tested on this blank site?")}`,
+      `- Users and timing: ${responseOrQuestion(users, "Who would use it, and at what time of day, season or ferry rush?")}`,
+      `- Style, materials or limits: ${responseOrQuestion(look, "What style, materials, scale or hard site limits should guide the concept?")}`,
       "If an answer is thin, ask one plain follow-up question before generating.",
-      "When ready, make a clearly labelled concept overlay. Keep the real photo recognisable and do not present it as approved design, survey data or a finished plan."
+      "When ready, make a clearly labelled future-concept overlay. Keep the cliffs, seawalls, shoreline and ferry/barge access believable, but redesign the blank terminal ground as needed. Do not present it as approved design, survey data or a finished plan."
     ].join("\n");
   }
 
   function syncGeneratorPrompt(point) {
-    const prompt = viewer?.querySelector("[data-generated-prompt]");
+    const prompt = ideaWorkbench?.querySelector("[data-generated-prompt]");
     if (prompt) prompt.value = buildGeneratorPrompt(point);
   }
 
@@ -382,11 +385,13 @@ function setupPhotoMap() {
 
   function setupPromptWorkflow(point) {
     const saveButton = viewer?.querySelector("[data-save-view]");
-    const copyButton = viewer?.querySelector("[data-copy-prompt]");
-    const prompt = viewer?.querySelector("[data-generated-prompt]");
-    const fields = viewer?.querySelectorAll("[data-design-focus], [data-design-extra], [data-design-notice], [data-design-idea], [data-design-people], [data-design-notes]") || [];
+    const ideaSaveButton = ideaWorkbench?.querySelector("[data-save-view]");
+    const copyButton = ideaWorkbench?.querySelector("[data-copy-prompt]");
+    const prompt = ideaWorkbench?.querySelector("[data-generated-prompt]");
+    const fields = ideaWorkbench?.querySelectorAll("[data-design-focus], [data-design-extra], [data-design-problem], [data-design-build], [data-design-users], [data-design-look]") || [];
 
     saveButton?.addEventListener("click", () => saveCurrentView(point));
+    ideaSaveButton?.addEventListener("click", () => saveCurrentView(point));
     fields.forEach((field) => field.addEventListener("input", () => syncGeneratorPrompt(point)));
     fields.forEach((field) => field.addEventListener("change", () => syncGeneratorPrompt(point)));
     copyButton?.addEventListener("click", async () => {
@@ -430,45 +435,58 @@ function setupPhotoMap() {
             <span class="pano-tag">360 viewer</span>
           </div>
           <div class="sphere-viewer main-sphere-viewer" data-sphere-stage aria-label="${point.title} interactive 360 viewer"></div>
-          <div class="viewer-toolbelt">
-            <div class="pano-pipeline compact-pipeline">
-              <h4>Save the view, then shape the idea</h4>
-              <p>Frame the site angle, save it as a PNG, answer the questions, then copy a prompt that carries your words into the image model.</p>
-              <div class="button-row">
-                <button class="button primary small-button" type="button" data-save-view>Save current view</button>
-                <a class="button ghost small-button" href="${point.pano}" download="${point.downloadName}">Download full 360</a>
-              </div>
-              <p class="workflow-status" data-workflow-status>Loading the 360 viewer...</p>
+          <div class="button-row viewer-buttons">
+            <button class="button primary small-button" type="button" data-save-view>Save current view</button>
+            <a class="button ghost small-button" href="${point.pano}" download="${point.downloadName}">Download full 360</a>
+          </div>
+          <details class="raw-pano-details">
+            <summary>Open the raw flattened panorama strip</summary>
+            <div class="pano-scroll"><img src="${point.pano}" alt="${point.title} equirectangular panorama"></div>
+          </details>
+        </div>
+      `;
+    }
+    if (ideaWorkbench) {
+      ideaWorkbench.innerHTML = `
+        <div class="idea-workbench-panel">
+          <div class="pano-pipeline compact-pipeline">
+            <h4>Make a community concept image</h4>
+            <p>Use the saved view as a blank-site reference, pick a project lane, then describe the future terminal idea you want people to debate.</p>
+            <div class="button-row">
+              <button class="button primary small-button" type="button" data-save-view>Save current view</button>
+              <a class="button ghost small-button" href="${point.pano}" download="${point.downloadName}">Download full 360</a>
             </div>
-            <details class="prompt-drawer" open>
-              <summary>Idea questions</summary>
-              <form class="idea-prompt-form" data-prompt-form>
-                <label>
+            <p class="workflow-status" data-workflow-status>Loading the 360 viewer...</p>
+          </div>
+          <details class="prompt-drawer" open>
+            <summary>Future design questions</summary>
+            <form class="idea-prompt-form" data-prompt-form>
+                <label class="lane-select-label">
                   <span>Starting lane</span>
                   <select data-design-focus>
                     ${renderConceptLaneOptions()}
                   </select>
                 </label>
                 <label>
-                  <span>Add another lane</span>
-                  <textarea data-design-extra rows="2" placeholder="If your idea does not fit the 17 numbered concept markers, name the missing lane here."></textarea>
+                  <span>Add your own lane</span>
+                  <textarea data-design-extra rows="3" placeholder="Name the missing community lane here."></textarea>
                 </label>
-                <p class="prompt-tip">The starting lanes mirror the 17 numbered TMR concept-design markers. If your idea sits outside that list, add your own lane in this box.</p>
+                <p class="prompt-tip">The 17 starting lanes mirror the numbered TMR concept-design markers. Add another lane if your idea does not fit. Treat the photo as a blank future terminal site: cliffs, seawalls, shoreline and access need to stay believable; the flat terminal ground is open for new ideas.</p>
                 <label>
-                  <span>What catches your eye?</span>
-                  <textarea data-design-notice rows="2" placeholder="What do you notice in this view: heat, glare, queueing, trees, water, parking, welcome, confusion, beauty?"></textarea>
+                  <span>Problem this solves</span>
+                  <textarea data-design-problem rows="3" placeholder="Parking, shade, queues, bus pickup, bikes, toilets, prams, storms, wildlife movement."></textarea>
                 </label>
                 <label class="prompt-question-wide">
-                  <span>What would you like to try?</span>
-                  <textarea data-design-idea rows="3" placeholder="Say it your way. What would you add, remove, move, protect, test or make easier here?"></textarea>
+                  <span>What should be built here?</span>
+                  <textarea data-design-build rows="3" placeholder="Name the future thing: shaded waiting spine, canopy, safer path, bus loop, kiosk, seating, bike hub, market edge, maker module, planting, shelter, lighting."></textarea>
                 </label>
                 <label>
-                  <span>Who should it help?</span>
-                  <textarea data-design-people rows="2" placeholder="Locals, Elders, kids, ferry workers, visitors, wildlife, people with prams, bikes, wheelchairs?"></textarea>
+                  <span>Who benefits and when?</span>
+                  <textarea data-design-users rows="3" placeholder="Commuters, school runs, Elders, ferry workers, visitors, cyclists, prams, wheelchairs, peak rush."></textarea>
                 </label>
                 <label>
-                  <span>What must stay real?</span>
-                  <textarea data-design-notes rows="2" placeholder="Keep the real shoreline, paths, vegetation, ferry context and public evidence visible; mark new elements as concept overlays."></textarea>
+                  <span>Style, materials, limits</span>
+                  <textarea data-design-look rows="3" placeholder="Local stone, timber, shade, solar, reef-safe drainage, high wind, believable cliffs and seawalls."></textarea>
                 </label>
                 <label class="prompt-output-label">
                   <span>AI prompt from your answers</span>
@@ -478,18 +496,15 @@ function setupPhotoMap() {
                   <button class="button ghost small-button" type="button" data-copy-prompt>Copy prompt</button>
                   <a class="button ghost small-button" href="simulation-workflows.html">Workflow guide</a>
                 </div>
-              </form>
-            </details>
-          </div>
-          <details class="raw-pano-details">
-            <summary>Open the raw flattened panorama strip</summary>
-            <div class="pano-scroll"><img src="${point.pano}" alt="${point.title} equirectangular panorama"></div>
+            </form>
           </details>
         </div>
       `;
-      setupSphereViewer(point);
-      setupPromptWorkflow(point);
     }
+    if (viewer) {
+      setupSphereViewer(point);
+    }
+    setupPromptWorkflow(point);
     document.querySelectorAll("[data-photo-id]").forEach((element) => {
       element.classList.toggle("active", element.dataset.photoId === activeId);
     });
