@@ -1109,8 +1109,8 @@ h3,
 
 .lane-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: .38rem;
+  grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+  gap: .22rem .8rem;
 }
 
 .lane-extra-inline {
@@ -1123,29 +1123,36 @@ h3,
 
 .idea-prompt-form .lane-check {
   display: flex;
-  align-items: flex-start;
-  gap: .38rem;
-  min-height: 36px;
-  padding: .42rem .48rem;
-  border: 1px solid rgba(255, 255, 255, .22);
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, .94);
-  color: var(--ink);
+  align-items: center;
+  gap: .45rem;
+  min-height: 0;
+  padding: .18rem .22rem;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: rgba(255, 255, 255, .9);
   cursor: pointer;
 }
 
 .lane-check input {
   flex: 0 0 auto;
-  margin-top: .16rem;
+  width: 15px;
+  height: 15px;
+  margin: 0;
   accent-color: var(--bay);
 }
 
 .idea-prompt-form .lane-check span {
   font-family: "Atkinson Hyperlegible", Arial, sans-serif;
-  font-size: .64rem;
+  font-size: .8rem;
   font-weight: 800;
-  line-height: 1.15;
+  line-height: 1.18;
   text-transform: none;
+}
+
+.idea-prompt-form .lane-check:has(input:checked) {
+  background: rgba(232, 184, 77, .16);
+  color: var(--white);
 }
 
 .idea-prompt-form label span,
@@ -1167,6 +1174,16 @@ h3,
   background: rgba(255, 255, 255, .94);
   color: var(--ink);
   font: inherit;
+}
+
+.idea-prompt-form .lane-check input {
+  width: 15px;
+  height: 15px;
+  min-width: 15px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .45);
+  border-radius: 3px;
+  background: var(--white);
 }
 
 .idea-prompt-form textarea {
@@ -1579,17 +1596,16 @@ h3,
   }
 
   .lane-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: .38rem;
+    grid-template-columns: 1fr;
+    gap: .25rem;
   }
 
   .idea-prompt-form .lane-check {
-    min-height: 46px;
-    padding: .42rem;
+    padding: .2rem .1rem;
   }
 
   .idea-prompt-form .lane-check span {
-    font-size: .66rem;
+    font-size: .76rem;
   }
 
   .lane-extra-inline {
