@@ -1093,7 +1093,7 @@ h3,
   padding: 0;
   border: 0;
   background: transparent;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: .75rem;
   align-items: start;
 }
@@ -1109,16 +1109,24 @@ h3,
 
 .lane-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: .45rem;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: .38rem;
+}
+
+.lane-extra-inline {
+  margin-top: .55rem;
+  display: grid;
+  grid-template-columns: auto minmax(180px, 1fr);
+  gap: .55rem;
+  align-items: center;
 }
 
 .idea-prompt-form .lane-check {
   display: flex;
   align-items: flex-start;
-  gap: .45rem;
-  min-height: 38px;
-  padding: .48rem .55rem;
+  gap: .38rem;
+  min-height: 36px;
+  padding: .42rem .48rem;
   border: 1px solid rgba(255, 255, 255, .22);
   border-radius: var(--radius);
   background: rgba(255, 255, 255, .94);
@@ -1134,14 +1142,10 @@ h3,
 
 .idea-prompt-form .lane-check span {
   font-family: "Atkinson Hyperlegible", Arial, sans-serif;
-  font-size: .74rem;
+  font-size: .64rem;
   font-weight: 800;
   line-height: 1.15;
   text-transform: none;
-}
-
-.field-span-2 {
-  grid-column: span 2;
 }
 
 .idea-prompt-form label span,
@@ -1154,6 +1158,7 @@ h3,
 }
 
 .idea-prompt-form select,
+.idea-prompt-form input,
 .idea-prompt-form textarea {
   width: 100%;
   border: 1px solid rgba(255, 255, 255, .25);
@@ -1174,28 +1179,9 @@ h3,
   grid-column: 1 / -1;
 }
 
-.idea-prompt-form .prompt-tip {
-  grid-column: span 3;
-}
-
-.prompt-tip {
-  margin: -.25rem 0 .1rem;
-  padding: .55rem .7rem;
-  border: 1px solid rgba(255, 255, 255, .2);
-  border-left: 5px solid var(--sun);
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, .08);
-  color: rgba(255, 255, 255, .82);
-  font-size: .88rem;
-}
-
 .idea-prompt-form [readonly] {
   min-height: 220px;
   background: #f7fbf8;
-}
-
-.prompt-drawer [data-design-build] {
-  min-height: 150px;
 }
 
 .prompt-actions {
@@ -1507,14 +1493,8 @@ h3,
     grid-column: span 1;
   }
 
-  .prompt-drawer .idea-prompt-form {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .lane-fieldset,
-  .extra-lane-label,
-  .idea-prompt-form .prompt-tip,
-  .field-span-2 {
+  .lane-extra-inline {
     grid-column: 1 / -1;
   }
 
@@ -1583,9 +1563,7 @@ h3,
 
   .compact-pipeline,
   .lane-fieldset,
-  .extra-lane-label,
-  .field-span-2,
-  .idea-prompt-form .prompt-tip,
+  .lane-extra-inline,
   .evidence-map-column .photo-preview,
   .evidence-map-column .download-panel,
   .evidence-map-column .thumb-drawer {
@@ -1612,6 +1590,10 @@ h3,
 
   .idea-prompt-form .lane-check span {
     font-size: .66rem;
+  }
+
+  .lane-extra-inline {
+    grid-template-columns: 1fr;
   }
 
   .pano-scroll img {

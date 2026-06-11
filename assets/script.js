@@ -266,13 +266,14 @@ function setupPhotoMap() {
     const users = ideaWorkbench?.querySelector("[data-design-users]")?.value.trim() || "";
     const look = ideaWorkbench?.querySelector("[data-design-look]")?.value.trim() || "";
     const output = ideaWorkbench?.querySelector("[data-design-output]")?.value.trim() || "";
+    const avoid = ideaWorkbench?.querySelector("[data-design-avoid]")?.value.trim() || "";
     const laneLabels = selectedLanes.map((lane) => lane.label);
     const laneValues = selectedLanes.map((lane) => lane.value);
     const laneBrief = [
       ...laneValues,
       extraLane ? `extra community lane: ${extraLane}` : ""
     ].filter(Boolean).join("; ");
-    const hasAnyAnswer = selectedLanes.length || extraLane || problem || build || placement || movement || users || look || output;
+    const hasAnyAnswer = selectedLanes.length || extraLane || problem || build || placement || movement || users || look || output || avoid;
 
     if (!hasAnyAnswer) {
       return [
@@ -281,11 +282,12 @@ function setupPhotoMap() {
         "Before generating an image, ask me seven plain design questions:",
         "1. Which numbered project lanes should this idea include?",
         "2. What everyday terminal problem or opportunity should it solve?",
-        "3. What buildings, landscape elements, shelter, services or public-space pieces should appear?",
-        "4. Where should they sit on the blank terminal ground, and how should they relate to the water, cliffs, seawalls and roads?",
-        "5. How should people, buses, bikes, cars, ferries, barges and wildlife move through it?",
+        "3. What visible design move should appear in the image?",
+        "4. How should the idea be arranged on the blank terminal ground?",
+        "5. Which movement conflicts should it calm, separate or prioritise?",
         "6. Who uses it, at what scale, and in what weather or ferry-rush conditions?",
-        "7. What material, climate and visual style should the concept image use?",
+        "7. What architectural character, materials, climate response and render style should guide the image?",
+        "8. What should the image avoid showing or implying?",
         "After I answer, turn my words into a clearly labelled future-infrastructure concept image for community vision-boarding."
       ].join("\n");
     }
@@ -296,13 +298,14 @@ function setupPhotoMap() {
       "Site reading: treat the current photo as a mostly blank, overgrown ex-sandmining terminal site. It is a starting pad for future infrastructure, not something to preserve as-is.",
       `Selected project lanes: ${responseOrQuestion(laneLabels.join("; "), "Which numbered project lanes should this idea include?")}`,
       `- Extra lane or missing issue: ${responseOrQuestion(extraLane, "If this does not fit the current concept-design list, what lane name would you add?")}`,
-      `Design aim: ${responseOrQuestion(problem, "What everyday terminal problem or opportunity should it solve?")}`,
-      `Programme and visible elements: ${responseOrQuestion(build, "What buildings, landscape elements, shelter, services or public-space pieces should appear?")}`,
-      `Placement and site relationship: ${responseOrQuestion(placement, "Where should the pieces sit, and how should they relate to the water, cliffs, seawalls, roads and blank ground?")}`,
-      `Movement and access: ${responseOrQuestion(movement, "How should people, buses, bikes, cars, ferries, barges and wildlife move through it?")}`,
-      `Users, operations and scale: ${responseOrQuestion(users, "Who uses it, at what scale, and in what weather or ferry-rush conditions?")}`,
-      `Form, materials and climate response: ${responseOrQuestion(look, "What material, climate and maintenance choices should guide it?")}`,
-      `Output style and labels: ${responseOrQuestion(output, "Should it look like a labelled photomontage, sketch overlay, realistic render, section marker or public-poster concept?")}`,
+      `Design intent: ${responseOrQuestion(problem, "What practical problem, opportunity or community value should the image test?")}`,
+      `Visible design move: ${responseOrQuestion(build, "What should visibly change in the scene?")}`,
+      `Spatial layout: ${responseOrQuestion(placement, "Where does the idea sit in the saved camera view, and what stays open or clear?")}`,
+      `Movement logic: ${responseOrQuestion(movement, "Which conflicts, queues, crossings or access paths should be calmed, separated or prioritised?")}`,
+      `Use scenario and scale: ${responseOrQuestion(users, "Who uses it, when is it busy, and how big should it feel?")}`,
+      `Architectural character and climate response: ${responseOrQuestion(look, "What form, materials, shade, wind, drainage and coastal maintenance choices should guide it?")}`,
+      `Image style and annotation: ${responseOrQuestion(output, "What render style, labels, colour coding or before/after notes should the image include?")}`,
+      `Avoid and guardrails: ${responseOrQuestion(avoid, "What should the image avoid showing or implying?")}`,
       laneBrief ? `Integrated concept scope: ${laneBrief}.` : "Integrated concept scope: ask me which project lanes to combine before generating.",
       "If an answer is thin, ask one plain follow-up question before generating.",
       "Image generation instructions: keep the source-photo perspective, horizon, light direction and scale cues believable. Make the new architecture and landscape read as an overlay on the real site, with clear labels for major changes. Show practical access, shade, waiting, movement and coastal-weather logic rather than generic resort styling.",
@@ -398,7 +401,7 @@ function setupPhotoMap() {
     const ideaSaveButton = ideaWorkbench?.querySelector("[data-save-view]");
     const copyButton = ideaWorkbench?.querySelector("[data-copy-prompt]");
     const prompt = ideaWorkbench?.querySelector("[data-generated-prompt]");
-    const fields = ideaWorkbench?.querySelectorAll("[data-design-lane], [data-design-extra], [data-design-problem], [data-design-build], [data-design-placement], [data-design-movement], [data-design-users], [data-design-look], [data-design-output]") || [];
+    const fields = ideaWorkbench?.querySelectorAll("[data-design-lane], [data-design-extra], [data-design-problem], [data-design-build], [data-design-placement], [data-design-movement], [data-design-users], [data-design-look], [data-design-output], [data-design-avoid]") || [];
 
     saveButton?.addEventListener("click", () => saveCurrentView(point));
     ideaSaveButton?.addEventListener("click", () => saveCurrentView(point));
@@ -461,7 +464,7 @@ function setupPhotoMap() {
         <div class="idea-workbench-panel">
           <div class="pano-pipeline compact-pipeline">
             <h4>Make a community concept image</h4>
-            <p>Save a view, select the project lanes it touches, then write a short architectural brief the image model can actually follow.</p>
+            <p>Save a view, tick the project lanes it touches, then write a compact design brief with one job per field.</p>
             <div class="button-row">
               <button class="button primary small-button" type="button" data-save-view>Save current view</button>
               <a class="button ghost small-button" href="${point.pano}" download="${point.downloadName}">Download full 360</a>
@@ -476,39 +479,42 @@ function setupPhotoMap() {
                   <div class="lane-grid">
                     ${renderConceptLaneCheckboxes()}
                   </div>
+                  <label class="lane-extra-inline">
+                    <span>Add another lane</span>
+                    <input type="text" data-design-extra placeholder="Optional missing lane">
+                  </label>
                 </fieldset>
-                <label class="extra-lane-label">
-                  <span>Add your own lane</span>
-                  <textarea data-design-extra rows="3" placeholder="Name the missing community lane here."></textarea>
-                </label>
-                <p class="prompt-tip">The 17 lanes mirror the numbered TMR concept-design markers. Tick every lane your idea touches, then add another lane if the official list misses something. Treat the photo as a blank future terminal site: cliffs, seawalls, shoreline and access need to stay believable; the flat terminal ground is open for new ideas.</p>
                 <label>
-                  <span>Design aim</span>
-                  <textarea data-design-problem rows="3" placeholder="What problem, opportunity or daily frustration should this solve?"></textarea>
-                </label>
-                <label class="field-span-2">
-                  <span>Programme + visible elements</span>
-                  <textarea data-design-build rows="3" placeholder="Canopy, terminal room, seating, bus loop, bike hub, ticketing, toilets, market edge, planting, lighting, maker module."></textarea>
+                  <span>Design intent</span>
+                  <textarea data-design-problem rows="3" placeholder="What practical problem, opportunity or community value should the image test?"></textarea>
                 </label>
                 <label>
-                  <span>Placement + site relationship</span>
-                  <textarea data-design-placement rows="3" placeholder="Where does it sit? Face water, cliffs, seawalls, roads and ferry access."></textarea>
+                  <span>Visible design move</span>
+                  <textarea data-design-build rows="3" placeholder="What should visibly change in the scene? Keep this specific to your idea, not the whole official list."></textarea>
                 </label>
                 <label>
-                  <span>Movement + access</span>
-                  <textarea data-design-movement rows="3" placeholder="Pedestrians, prams, wheelchairs, bikes, cars, buses, queues, ferries, wildlife."></textarea>
+                  <span>Spatial layout</span>
+                  <textarea data-design-placement rows="3" placeholder="Where does it sit in this camera view? What stays open, clear, low, high, near, far or edge-aligned?"></textarea>
                 </label>
                 <label>
-                  <span>Users + operating conditions</span>
-                  <textarea data-design-users rows="3" placeholder="Commuters, school runs, Elders, workers, visitors, rush hour, storms, heat, night arrivals."></textarea>
+                  <span>Movement logic</span>
+                  <textarea data-design-movement rows="3" placeholder="Which conflicts, crossings, queues or access paths should be calmed, separated or prioritised?"></textarea>
                 </label>
                 <label>
-                  <span>Form, materials + climate</span>
-                  <textarea data-design-look rows="3" placeholder="Coastal structure, shade, wind, drainage, local stone, timber, solar, reef-safe runoff."></textarea>
+                  <span>Use scenario + scale</span>
+                  <textarea data-design-users rows="3" placeholder="Who uses it, when is it busy, and should it feel small, civic, sheltered, open, temporary or permanent?"></textarea>
                 </label>
-                <label class="field-span-2">
-                  <span>Image output style</span>
-                  <textarea data-design-output rows="3" placeholder="Labelled photomontage, realistic but conceptual, same camera angle, show what changes."></textarea>
+                <label>
+                  <span>Architecture + climate</span>
+                  <textarea data-design-look rows="3" placeholder="What form, materials, shade, wind, drainage and coastal maintenance logic should guide it?"></textarea>
+                </label>
+                <label>
+                  <span>Render + annotation style</span>
+                  <textarea data-design-output rows="3" placeholder="Photomontage, sketch overlay, realistic render, labels, colour-coded paths, before/after notes, keep it clearly conceptual."></textarea>
+                </label>
+                <label>
+                  <span>Avoid + guardrails</span>
+                  <textarea data-design-avoid rows="3" placeholder="What should not appear or be implied: approved plan, survey accuracy, luxury resort look, blocked access, impossible structures."></textarea>
                 </label>
                 <label class="prompt-output-label">
                   <span>AI prompt from your answers</span>
