@@ -91,6 +91,15 @@ function setupExternalLinks() {
   });
 }
 
+function supportsWebGl() {
+  try {
+    const canvas = document.createElement("canvas");
+    return !!(window.WebGLRenderingContext && (canvas.getContext("webgl") || canvas.getContext("experimental-webgl")));
+  } catch (error) {
+    return false;
+  }
+}
+
 function setupPhotoMap() {
   const map = document.querySelector("[data-photo-map]");
   const preview = document.querySelector("[data-photo-preview]");
@@ -118,6 +127,39 @@ function setupPhotoMap() {
     const x = 12 + ((point.lon - minLon) / Math.max(maxLon - minLon, .00001)) * 76;
     const y = 86 - ((point.lat - minLat) / Math.max(maxLat - minLat, .00001)) * 70;
     return { x, y };
+  }
+
+  function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+  }
+
+  function spreadMapPoints() {
+    const placed = [];
+    const minDistance = 7.2;
+
+    return points.map((point, index) => {
+      const base = project(point);
+      let position = base;
+
+      for (let attempt = 0; attempt < 64; attempt += 1) {
+        const ring = Math.ceil(attempt / 8);
+        const radius = attempt === 0 ? 0 : ring * 4.2;
+        const angle = ((attempt % 8) / 8) * Math.PI * 2 + (index % 3) * .24;
+        const candidate = {
+          x: clamp(base.x + Math.cos(angle) * radius, 8, 92),
+          y: clamp(base.y + Math.sin(angle) * radius, 10, 90)
+        };
+        const clear = placed.every((existing) => Math.hypot(candidate.x - existing.x, candidate.y - existing.y) >= minDistance);
+
+        if (clear) {
+          position = candidate;
+          break;
+        }
+      }
+
+      placed.push(position);
+      return { point, position };
+    });
   }
 
   function downloadFile(url, filename) {
@@ -224,8 +266,21 @@ function setupPhotoMap() {
       sphereViewer = null;
     }
 
+    if (!supportsWebGl()) {
+      stage.innerHTML = `
+        <div class="viewer-fallback">
+          <h4>360 viewer unavailable on this device</h4>
+          <p>This browser or computer is not offering WebGL, which the look-around viewer needs. Older laptops, older operating systems, disabled hardware acceleration or locked-down browser settings can cause this.</p>
+          <p>The public evidence still works: use the selected thumbnail, the raw flattened panorama strip below, or download the original 360 photo.</p>
+        </div>
+      `;
+      setWorkflowStatus("WebGL is not available here. Use the fallback image, raw strip or download links.");
+      return;
+    }
+
     if (!window.pannellum?.viewer) {
-      stage.innerHTML = `<p class="viewer-fallback">The interactive 360 viewer did not load. The raw panorama strip is still available below.</p>`;
+      stage.innerHTML = `<p class="viewer-fallback">The interactive 360 viewer did not load. Use the thumbnail, raw panorama strip or downloads as the fallback.</p>`;
+      setWorkflowStatus("The 360 viewer library did not load. Use the fallback image, raw strip or download links.");
       return;
     }
 
@@ -284,68 +339,70 @@ function setupPhotoMap() {
       sphereViewer = null;
     }
     preview.innerHTML = `
-      <figure class="selected-photo-frame">
+      <div class="selected-photo-compact">
         <img src="${point.thumb}" alt="${point.title}">
-        <span>360 pano seed</span>
-      </figure>
-      <h3>${point.title}</h3>
-      <p class="photo-meta">Captured ${point.captureLabel} - ${point.lat.toFixed(5)}, ${point.lon.toFixed(5)}</p>
-      <p>${point.notes}</p>
+        <div>
+          <span class="section-label">Selected point</span>
+          <h3>${point.title}</h3>
+          <p class="photo-meta">${point.captureLabel} - ${point.lat.toFixed(5)}, ${point.lon.toFixed(5)}</p>
+        </div>
+      </div>
     `;
     if (viewer) {
       viewer.innerHTML = `
-        <div class="pano-viewer">
+        <div class="pano-viewer main-pano-viewer">
           <div class="pano-header">
             <div>
-              <h3>${point.title} interactive 360 view</h3>
-              <p>Drag to look around, frame a useful angle, then save that view as a normal PNG for an image-generator reference.</p>
+              <span class="section-label">Interactive 360 view</span>
+              <h3>${point.title}</h3>
+              <p>Drag inside the photo, frame the angle that matters, then save that view as the reference image for a labelled concept overlay.</p>
             </div>
             <span class="pano-tag">360 viewer</span>
           </div>
-          <div class="pano-workbench">
-            <div class="sphere-viewer" data-sphere-stage aria-label="${point.title} interactive 360 viewer"></div>
-            <div class="pano-pipeline">
-              <h4>Save a view, then generate a concept overlay</h4>
-              <ol>
-                <li>Look around until the exact shoreline, path, shelter or car-park angle is visible.</li>
-                <li>Save the current view. The download is a normal PNG, not the full equirectangular strip.</li>
-                <li>Attach that PNG to an image generator, then paste the prompt below.</li>
-                <li>Share the result only as a labelled concept overlay, with the original source photo still linked.</li>
-              </ol>
-              <button class="button primary small-button" type="button" data-save-view>Save current view</button>
+          <div class="sphere-viewer main-sphere-viewer" data-sphere-stage aria-label="${point.title} interactive 360 viewer"></div>
+          <div class="viewer-toolbelt">
+            <div class="pano-pipeline compact-pipeline">
+              <h4>View to image-generator concept</h4>
+              <p>Frame the site angle, save it as a PNG, attach that PNG to an image model, then paste the prompt. Keep the original photo linked beside any generated concept.</p>
+              <div class="button-row">
+                <button class="button primary small-button" type="button" data-save-view>Save current view</button>
+                <a class="button ghost small-button" href="${point.pano}" download="${point.downloadName}">Download full 360</a>
+              </div>
               <p class="workflow-status" data-workflow-status>Loading the 360 viewer...</p>
             </div>
+            <details class="prompt-drawer" open>
+              <summary>Concept prompt</summary>
+              <form class="idea-prompt-form" data-prompt-form>
+                <label>
+                  <span>Focus</span>
+                  <select data-design-focus>
+                    <option value="shade, seating and a calmer waiting area">Shade + seating</option>
+                    <option value="safer pedestrian movement and clearer ferry queues">Movement + queues</option>
+                    <option value="Gumpi arrival, culture and public welcome">Culture + arrival</option>
+                    <option value="wildlife-safe edges, planting and stormwater care">Ecology + edges</option>
+                    <option value="local enterprise, kiosks and event noticeboards">Local enterprise</option>
+                    <option value="maker-space prototype: modular rails, blocks or shelters">Maker prototype</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Idea to test</span>
+                  <textarea data-design-idea rows="3" placeholder="Example: add a lightweight shade canopy and seating line that keeps the sea view open and leaves service access clear."></textarea>
+                </label>
+                <label class="prompt-output-label">
+                  <span>Prompt</span>
+                  <textarea data-generated-prompt rows="5" readonly></textarea>
+                </label>
+                <label class="honesty-notes-label">
+                  <span>Keep honest</span>
+                  <textarea data-design-notes rows="2" placeholder="Keep the real shoreline, paths, vegetation, ferry context and public evidence visible; mark new elements as concept overlays."></textarea>
+                </label>
+                <div class="button-row prompt-actions">
+                  <button class="button ghost small-button" type="button" data-copy-prompt>Copy prompt</button>
+                  <a class="button ghost small-button" href="simulation-workflows.html">Workflow guide</a>
+                </div>
+              </form>
+            </details>
           </div>
-          <form class="idea-prompt-form" data-prompt-form>
-            <label>
-              <span>Design focus</span>
-              <select data-design-focus>
-                <option>shade, seating and a calmer waiting area</option>
-                <option>safer pedestrian movement and clearer ferry queues</option>
-                <option>Gumpi arrival, culture and public welcome</option>
-                <option>wildlife-safe edges, planting and stormwater care</option>
-                <option>local enterprise, kiosks and event noticeboards</option>
-                <option>maker-space prototype: modular rails, blocks or shelters</option>
-              </select>
-            </label>
-            <label>
-              <span>Idea to test</span>
-              <textarea data-design-idea rows="4" placeholder="Example: add a lightweight shade canopy and seating line that keeps the sea view open and leaves service access clear."></textarea>
-            </label>
-            <label>
-              <span>Keep honest</span>
-              <textarea data-design-notes rows="3" placeholder="Example: keep the real shoreline, vegetation, road edge and ferry context visible; mark new design elements as concept overlays."></textarea>
-            </label>
-            <label class="prompt-output-label">
-              <span>Generated image prompt</span>
-              <textarea data-generated-prompt rows="6" readonly></textarea>
-            </label>
-            <div class="button-row">
-              <button class="button ghost small-button" type="button" data-copy-prompt>Copy prompt</button>
-              <a class="button ghost small-button" href="simulation-workflows.html">Open workflow guide</a>
-              <a class="button ghost small-button" href="${point.pano}" download="${point.downloadName}">Download full 360</a>
-            </div>
-          </form>
           <details class="raw-pano-details">
             <summary>Open the raw flattened panorama strip</summary>
             <div class="pano-scroll"><img src="${point.pano}" alt="${point.title} equirectangular panorama"></div>
@@ -360,8 +417,8 @@ function setupPhotoMap() {
     });
   }
 
-  points.forEach((point, index) => {
-    const { x, y } = project(point);
+  spreadMapPoints().forEach(({ point, position }, index) => {
+    const { x, y } = position;
     const marker = document.createElement("button");
     marker.className = "map-point";
     marker.type = "button";

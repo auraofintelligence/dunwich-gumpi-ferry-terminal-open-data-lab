@@ -28,21 +28,23 @@
         </figure>
       </section>
 
-      <section class="section" aria-labelledby="map-title">
+      <section class="section evidence-workspace-section" aria-labelledby="map-title">
         <div class="section-heading">
-          <span class="section-label">Photo points</span>
-          <h2 id="map-title">Pick a point, then look around inside the 360 photo.</h2>
-          <p>The map plane is schematic. It intentionally avoids pretending the current prototype is more precise than it is.</p>
+          <span class="section-label">360 evidence workbench</span>
+          <h2 id="map-title">Pick a GPS point, look around, save the view.</h2>
+          <p>The map is schematic and the GPS has been rounded. Use it to choose a public photo point, inspect the 360 view, save a normal-looking angle, then pair that saved image with a labelled concept prompt.</p>
+          <p class="compat-note">The 360 viewer needs WebGL. It should work in current Chrome, Edge, Firefox and Safari, but some older laptops, older operating systems, locked-down browsers or disabled hardware acceleration may show only the fallback. If that happens, use the thumbnail, raw panorama strip or downloads instead.</p>
         </div>
-        <div class="map-layout">
-          <div class="map-panel">
-            <div class="map-canvas" data-photo-map aria-label="Schematic map of rounded 360 photo points"></div>
-          </div>
-          <aside class="map-side" aria-label="Selected photo">
+        <div class="evidence-workspace">
+          <div data-pano-viewer aria-label="Selected 360 panorama workbench"></div>
+          <aside class="evidence-map-column" aria-label="GPS map and selected photo controls">
+            <div class="map-panel compact-map-panel">
+              <div class="map-canvas evidence-map-canvas" data-photo-map aria-label="Schematic map of rounded 360 photo points"></div>
+            </div>
             <div class="photo-preview" data-photo-preview></div>
-            <div class="download-panel" data-download-panel>
-              <h3>Download 360 images</h3>
-              <p><span data-selected-count>0 selected</span> from the mapped panorama set.</p>
+            <details class="download-panel compact-disclosure" data-download-panel>
+              <summary>Downloads</summary>
+              <p><span data-selected-count>0 selected</span> from the mapped set.</p>
               <div class="download-actions">
                 <button class="button ghost small-button" type="button" data-download-current>Download current</button>
                 <button class="button ghost small-button" type="button" data-select-all-panos>Select all mapped</button>
@@ -50,31 +52,12 @@
                 <button class="button primary small-button" type="button" data-download-selected>Download selected</button>
                 <a class="button ghost small-button" href="assets/downloads/dunwich-gumpi-public-360-panoramas.zip" download>Download full set</a>
               </div>
-            </div>
-            <div class="thumb-list" data-photo-thumbs aria-label="360 photo thumbnails"></div>
+            </details>
+            <details class="thumb-drawer">
+              <summary>Open thumbnail list</summary>
+              <div class="thumb-list" data-photo-thumbs aria-label="360 photo thumbnails"></div>
+            </details>
           </aside>
-        </div>
-      </section>
-
-      <section class="section accent-band" aria-labelledby="pano-title">
-        <div class="wide-copy">
-          <span class="section-label">Panorama strip</span>
-          <h2 id="pano-title">The selected 360 image becomes a prompt seed.</h2>
-          <p>Look around the selected 360 photo, save a normal view from the angle you care about, then use that exported image with a plain-language idea prompt. The saved view is the evidence reference; any generated overlay is a concept, not a claim that the place already looks that way.</p>
-        </div>
-        <div data-pano-viewer></div>
-      </section>
-
-      <section class="section" aria-labelledby="use-title">
-        <div class="section-heading">
-          <span class="section-label">What to do with this</span>
-          <h2 id="use-title">Turn the map into useful questions.</h2>
-        </div>
-        <div class="scenario-grid">
-          <article class="scenario-card"><h3>Access and movement</h3><p>Where do pedestrians, ferry passengers, buses, barge traffic, kiss-and-ride cars and bikes currently collide or slow each other down?</p></article>
-          <article class="scenario-card"><h3>Shade and waiting</h3><p>Which waiting areas feel exposed, uncomfortable or hard to understand, and what canopies or landscape ideas would actually help?</p></article>
-          <article class="scenario-card"><h3>Culture and arrival</h3><p>What makes the arrival feel specifically Gumpi and Minjerribah rather than generic ferry infrastructure?</p></article>
-          <article class="scenario-card"><h3>Open data ask</h3><p>Which official source files would improve the community simulation: CAD, GIS layers, bathymetry, ground survey, LiDAR, traffic counts or constraints maps?</p></article>
         </div>
       </section>
 
