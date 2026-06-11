@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Nunito+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
     <link rel="stylesheet" href="assets/styles.css">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   </head>
@@ -30,7 +31,7 @@
       <section class="section" aria-labelledby="map-title">
         <div class="section-heading">
           <span class="section-label">Photo points</span>
-          <h2 id="map-title">Pick a point, then inspect the flattened panorama.</h2>
+          <h2 id="map-title">Pick a point, then look around inside the 360 photo.</h2>
           <p>The map plane is schematic. It intentionally avoids pretending the current prototype is more precise than it is.</p>
         </div>
         <div class="map-layout">
@@ -59,7 +60,7 @@
         <div class="wide-copy">
           <span class="section-label">Panorama strip</span>
           <h2 id="pano-title">The selected 360 image becomes a prompt seed.</h2>
-          <p>World builders usually prefer clean spatial inputs. These 2:1 equirectangular images are a useful start for tools that accept panoramas, and a useful visual reference for tools that do not.</p>
+          <p>Look around the selected 360 photo, save a normal view from the angle you care about, then use that exported image with a plain-language idea prompt. The saved view is the evidence reference; any generated overlay is a concept, not a claim that the place already looks that way.</p>
         </div>
         <div data-pano-viewer></div>
       </section>
@@ -81,6 +82,7 @@
     </main>
     <footer class="site-footer" data-site-footer></footer>
     <button class="to-top" type="button" data-to-top aria-label="Back to top">Top</button>
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <script src="assets/photo-data.js"></script>
     <script src="assets/script.js"></script>
   </body>

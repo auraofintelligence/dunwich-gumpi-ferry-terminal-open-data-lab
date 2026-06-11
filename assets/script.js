@@ -112,6 +112,7 @@ function setupPhotoMap() {
   const maxLon = Math.max(...lons);
   let activeId = points[0].id;
   const selectedIds = new Set();
+  let sphereViewer = null;
 
   function project(point) {
     const x = 12 + ((point.lon - minLon) / Math.max(maxLon - minLon, .00001)) * 76;
@@ -152,8 +153,136 @@ function setupPhotoMap() {
     });
   }
 
+  function viewFileName(point) {
+    const base = point.downloadName.replace(/\.[^.]+$/, "");
+    if (!sphereViewer) return `${base}-current-view.png`;
+    const yaw = Math.round(sphereViewer.getYaw());
+    const pitch = Math.round(sphereViewer.getPitch());
+    return `${base}-view-yaw-${yaw}-pitch-${pitch}.png`;
+  }
+
+  function setWorkflowStatus(message) {
+    const status = viewer?.querySelector("[data-workflow-status]");
+    if (status) status.textContent = message;
+  }
+
+  function currentViewLabel() {
+    if (!sphereViewer) return "selected viewer angle";
+    return `yaw ${Math.round(sphereViewer.getYaw())}, pitch ${Math.round(sphereViewer.getPitch())}, field of view ${Math.round(sphereViewer.getHfov())}`;
+  }
+
+  function buildGeneratorPrompt(point) {
+    const focus = viewer?.querySelector("[data-design-focus]")?.value || "shade, safety and arrival experience";
+    const idea = viewer?.querySelector("[data-design-idea]")?.value.trim() || "a practical public-space improvement that locals could debate, change or reject";
+    const notes = viewer?.querySelector("[data-design-notes]")?.value.trim() || "keep the existing shoreline, paths, vegetation, ferry context and public evidence visible";
+    return [
+      `Use the attached saved view from ${point.title} as the real site reference.`,
+      `Create a clearly labelled concept overlay for ${focus}.`,
+      `Idea: ${idea}.`,
+      `Keep the current place recognisable: ${notes}.`,
+      "Do not present the image as an approved design, survey drawing or finished plan.",
+      "Make it useful for community discussion: show what changes, what stays, and what still needs real data."
+    ].join(" ");
+  }
+
+  function syncGeneratorPrompt(point) {
+    const prompt = viewer?.querySelector("[data-generated-prompt]");
+    if (prompt) prompt.value = buildGeneratorPrompt(point);
+  }
+
+  function saveCurrentView(point) {
+    if (!sphereViewer || !sphereViewer.isLoaded()) {
+      setWorkflowStatus("The 360 viewer is still loading. Try again once the image is visible.");
+      return;
+    }
+
+    try {
+      sphereViewer.stopMovement();
+      const canvas = sphereViewer.getRenderer()?.getCanvas?.();
+      if (!canvas || !canvas.toBlob) throw new Error("Viewer canvas is not available.");
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          setWorkflowStatus("This browser could not export the view. Use a browser screenshot, then copy the prompt below.");
+          return;
+        }
+        const url = URL.createObjectURL(blob);
+        downloadFile(url, viewFileName(point));
+        window.setTimeout(() => URL.revokeObjectURL(url), 2000);
+        setWorkflowStatus(`Saved the current view as a PNG from ${currentViewLabel()}. Use that image with the prompt below.`);
+      }, "image/png");
+    } catch (error) {
+      setWorkflowStatus("This browser could not export the view. Use a browser screenshot, then copy the prompt below.");
+    }
+  }
+
+  function setupSphereViewer(point) {
+    const stage = viewer?.querySelector("[data-sphere-stage]");
+    if (!stage) return;
+
+    if (sphereViewer?.destroy) {
+      sphereViewer.destroy();
+      sphereViewer = null;
+    }
+
+    if (!window.pannellum?.viewer) {
+      stage.innerHTML = `<p class="viewer-fallback">The interactive 360 viewer did not load. The raw panorama strip is still available below.</p>`;
+      return;
+    }
+
+    sphereViewer = pannellum.viewer(stage, {
+      type: "equirectangular",
+      panorama: point.pano,
+      autoLoad: true,
+      showControls: true,
+      showFullscreenCtrl: true,
+      pitch: -4,
+      yaw: 0,
+      hfov: 95,
+      minHfov: 35,
+      maxHfov: 120,
+      compass: false,
+      preview: point.thumb,
+      previewTitle: point.title,
+      previewAuthor: "Dunwich Gumpi Open Data Lab"
+    });
+
+    sphereViewer.on("load", () => {
+      setWorkflowStatus("Drag the 360 photo until the useful angle is framed, then save the current view.");
+    });
+
+    sphereViewer.on("error", () => {
+      setWorkflowStatus("The interactive viewer could not load this panorama. Use the raw strip below as the fallback reference.");
+    });
+  }
+
+  function setupPromptWorkflow(point) {
+    const saveButton = viewer?.querySelector("[data-save-view]");
+    const copyButton = viewer?.querySelector("[data-copy-prompt]");
+    const prompt = viewer?.querySelector("[data-generated-prompt]");
+    const fields = viewer?.querySelectorAll("[data-design-focus], [data-design-idea], [data-design-notes]") || [];
+
+    saveButton?.addEventListener("click", () => saveCurrentView(point));
+    fields.forEach((field) => field.addEventListener("input", () => syncGeneratorPrompt(point)));
+    fields.forEach((field) => field.addEventListener("change", () => syncGeneratorPrompt(point)));
+    copyButton?.addEventListener("click", async () => {
+      syncGeneratorPrompt(point);
+      try {
+        await navigator.clipboard.writeText(prompt.value);
+        setWorkflowStatus("Prompt copied. Attach the saved view in your image generator, then paste this prompt.");
+      } catch (error) {
+        prompt.select();
+        setWorkflowStatus("Prompt selected. Copy it manually, then attach the saved view in your image generator.");
+      }
+    });
+    syncGeneratorPrompt(point);
+  }
+
   function renderActive(point) {
     activeId = point.id;
+    if (sphereViewer?.destroy) {
+      sphereViewer.destroy();
+      sphereViewer = null;
+    }
     preview.innerHTML = `
       <figure class="selected-photo-frame">
         <img src="${point.thumb}" alt="${point.title}">
@@ -168,14 +297,63 @@ function setupPhotoMap() {
         <div class="pano-viewer">
           <div class="pano-header">
             <div>
-              <h3>${point.title} panorama strip</h3>
-              <p>Scroll sideways to inspect the flattened 360 image. This is good enough for early idea prompts, not a survey model.</p>
+              <h3>${point.title} interactive 360 view</h3>
+              <p>Drag to look around, frame a useful angle, then save that view as a normal PNG for an image-generator reference.</p>
             </div>
-            <span class="pano-tag">2:1 360 image</span>
+            <span class="pano-tag">360 viewer</span>
           </div>
-          <div class="pano-scroll"><img src="${point.pano}" alt="${point.title} equirectangular panorama"></div>
+          <div class="pano-workbench">
+            <div class="sphere-viewer" data-sphere-stage aria-label="${point.title} interactive 360 viewer"></div>
+            <div class="pano-pipeline">
+              <h4>Save a view, then generate a concept overlay</h4>
+              <ol>
+                <li>Look around until the exact shoreline, path, shelter or car-park angle is visible.</li>
+                <li>Save the current view. The download is a normal PNG, not the full equirectangular strip.</li>
+                <li>Attach that PNG to an image generator, then paste the prompt below.</li>
+                <li>Share the result only as a labelled concept overlay, with the original source photo still linked.</li>
+              </ol>
+              <button class="button primary small-button" type="button" data-save-view>Save current view</button>
+              <p class="workflow-status" data-workflow-status>Loading the 360 viewer...</p>
+            </div>
+          </div>
+          <form class="idea-prompt-form" data-prompt-form>
+            <label>
+              <span>Design focus</span>
+              <select data-design-focus>
+                <option>shade, seating and a calmer waiting area</option>
+                <option>safer pedestrian movement and clearer ferry queues</option>
+                <option>Gumpi arrival, culture and public welcome</option>
+                <option>wildlife-safe edges, planting and stormwater care</option>
+                <option>local enterprise, kiosks and event noticeboards</option>
+                <option>maker-space prototype: modular rails, blocks or shelters</option>
+              </select>
+            </label>
+            <label>
+              <span>Idea to test</span>
+              <textarea data-design-idea rows="4" placeholder="Example: add a lightweight shade canopy and seating line that keeps the sea view open and leaves service access clear."></textarea>
+            </label>
+            <label>
+              <span>Keep honest</span>
+              <textarea data-design-notes rows="3" placeholder="Example: keep the real shoreline, vegetation, road edge and ferry context visible; mark new design elements as concept overlays."></textarea>
+            </label>
+            <label class="prompt-output-label">
+              <span>Generated image prompt</span>
+              <textarea data-generated-prompt rows="6" readonly></textarea>
+            </label>
+            <div class="button-row">
+              <button class="button ghost small-button" type="button" data-copy-prompt>Copy prompt</button>
+              <a class="button ghost small-button" href="simulation-workflows.html">Open workflow guide</a>
+              <a class="button ghost small-button" href="${point.pano}" download="${point.downloadName}">Download full 360</a>
+            </div>
+          </form>
+          <details class="raw-pano-details">
+            <summary>Open the raw flattened panorama strip</summary>
+            <div class="pano-scroll"><img src="${point.pano}" alt="${point.title} equirectangular panorama"></div>
+          </details>
         </div>
       `;
+      setupSphereViewer(point);
+      setupPromptWorkflow(point);
     }
     document.querySelectorAll("[data-photo-id]").forEach((element) => {
       element.classList.toggle("active", element.dataset.photoId === activeId);

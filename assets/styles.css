@@ -835,6 +835,123 @@ h3,
   object-fit: cover;
 }
 
+.pano-workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, .42fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.sphere-viewer {
+  min-height: 560px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .24);
+  border-radius: var(--radius);
+  background: #050607;
+}
+
+.sphere-viewer .pnlm-container {
+  border-radius: var(--radius);
+}
+
+.viewer-fallback {
+  margin: 0;
+  padding: 1rem;
+  color: rgba(255, 255, 255, .82);
+}
+
+.pano-pipeline,
+.idea-prompt-form,
+.raw-pano-details {
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .08);
+}
+
+.pano-pipeline {
+  padding: 1rem;
+}
+
+.pano-pipeline h4 {
+  margin: 0 0 .55rem;
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.pano-pipeline ol {
+  margin: 0 0 .9rem 1.1rem;
+  padding: 0;
+  color: rgba(255, 255, 255, .82);
+}
+
+.workflow-status {
+  margin: .75rem 0 0;
+  color: rgba(255, 255, 255, .78);
+  font-size: .9rem;
+}
+
+.idea-prompt-form {
+  margin-top: 1rem;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .9rem;
+}
+
+.idea-prompt-form label {
+  display: grid;
+  gap: .35rem;
+  color: rgba(255, 255, 255, .86);
+  font-weight: 700;
+}
+
+.idea-prompt-form label span,
+.raw-pano-details summary {
+  font-family: "Nunito Sans", Arial, sans-serif;
+  font-size: .72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.idea-prompt-form select,
+.idea-prompt-form textarea {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: var(--radius);
+  padding: .72rem;
+  background: rgba(255, 255, 255, .94);
+  color: var(--ink);
+  font: inherit;
+}
+
+.idea-prompt-form textarea {
+  resize: vertical;
+}
+
+.idea-prompt-form .prompt-output-label,
+.idea-prompt-form .button-row {
+  grid-column: 1 / -1;
+}
+
+.idea-prompt-form [readonly] {
+  min-height: 150px;
+  background: #f7fbf8;
+}
+
+.raw-pano-details {
+  margin-top: 1rem;
+  padding: .9rem;
+}
+
+.raw-pano-details summary {
+  cursor: pointer;
+  color: var(--white);
+}
+
+.raw-pano-details .pano-scroll {
+  margin-top: .85rem;
+}
+
 .spectrum-rail {
   display: grid;
   gap: .8rem;
@@ -1094,6 +1211,7 @@ h3,
 
   .page-hero,
   .map-layout,
+  .pano-workbench,
   .song-video-layout,
   .home-video-layout {
     grid-template-columns: 1fr;
@@ -1142,6 +1260,14 @@ h3,
   .thumb-list {
     grid-template-columns: 1fr;
     max-height: none;
+  }
+
+  .sphere-viewer {
+    min-height: 360px;
+  }
+
+  .idea-prompt-form {
+    grid-template-columns: 1fr;
   }
 
   .pano-scroll img {
