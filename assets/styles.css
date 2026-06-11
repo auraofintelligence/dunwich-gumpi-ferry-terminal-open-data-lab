@@ -1092,6 +1092,7 @@ h3,
 }
 
 .idea-prompt-form .prompt-output-label,
+.idea-prompt-form .prompt-question-wide,
 .idea-prompt-form .honesty-notes-label,
 .idea-prompt-form .button-row {
   grid-column: 1 / -1;

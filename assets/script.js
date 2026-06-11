@@ -213,18 +213,41 @@ function setupPhotoMap() {
     return `yaw ${Math.round(sphereViewer.getYaw())}, pitch ${Math.round(sphereViewer.getPitch())}, field of view ${Math.round(sphereViewer.getHfov())}`;
   }
 
+  function responseOrQuestion(answer, question) {
+    return answer ? answer : `Ask me: ${question}`;
+  }
+
   function buildGeneratorPrompt(point) {
-    const focus = viewer?.querySelector("[data-design-focus]")?.value || "shade, safety and arrival experience";
-    const idea = viewer?.querySelector("[data-design-idea]")?.value.trim() || "a practical public-space improvement that locals could debate, change or reject";
-    const notes = viewer?.querySelector("[data-design-notes]")?.value.trim() || "keep the existing shoreline, paths, vegetation, ferry context and public evidence visible";
+    const focus = viewer?.querySelector("[data-design-focus]")?.value || "an open community design idea";
+    const noticed = viewer?.querySelector("[data-design-notice]")?.value.trim() || "";
+    const idea = viewer?.querySelector("[data-design-idea]")?.value.trim() || "";
+    const people = viewer?.querySelector("[data-design-people]")?.value.trim() || "";
+    const notes = viewer?.querySelector("[data-design-notes]")?.value.trim() || "";
+    const hasAnyAnswer = noticed || idea || people || notes;
+
+    if (!hasAnyAnswer) {
+      return [
+        `Use the attached saved view from ${point.title} as the real site reference.`,
+        "Before generating an image, ask me four quick questions:",
+        "1. What caught your eye in this exact view?",
+        "2. What would you change, add, remove, move or protect here?",
+        "3. Who should this help, and what should feel better for them?",
+        "4. What must stay recognisable from the real place?",
+        "After I answer, turn my words into a clearly labelled concept overlay for community discussion."
+      ].join("\n");
+    }
+
     return [
       `Use the attached saved view from ${point.title} as the real site reference.`,
-      `Create a clearly labelled concept overlay for ${focus}.`,
-      `Idea: ${idea}.`,
-      `Keep the current place recognisable: ${notes}.`,
-      "Do not present the image as an approved design, survey drawing or finished plan.",
-      "Make it useful for community discussion: show what changes, what stays, and what still needs real data."
-    ].join(" ");
+      `Help me visualise my own idea in the ${focus} lane.`,
+      "My answers:",
+      `- What I noticed: ${responseOrQuestion(noticed, "What caught your eye in this exact view?")}`,
+      `- What I want to try: ${responseOrQuestion(idea, "What would you change, add, remove, move or protect here?")}`,
+      `- Who it should help: ${responseOrQuestion(people, "Who should this help, and what should feel better for them?")}`,
+      `- What should stay recognisable: ${responseOrQuestion(notes, "What must stay recognisable from the real place?")}`,
+      "If an answer is thin, ask one plain follow-up question before generating.",
+      "When ready, make a clearly labelled concept overlay. Keep the real photo recognisable and do not present it as approved design, survey data or a finished plan."
+    ].join("\n");
   }
 
   function syncGeneratorPrompt(point) {
@@ -314,7 +337,7 @@ function setupPhotoMap() {
     const saveButton = viewer?.querySelector("[data-save-view]");
     const copyButton = viewer?.querySelector("[data-copy-prompt]");
     const prompt = viewer?.querySelector("[data-generated-prompt]");
-    const fields = viewer?.querySelectorAll("[data-design-focus], [data-design-idea], [data-design-notes]") || [];
+    const fields = viewer?.querySelectorAll("[data-design-focus], [data-design-notice], [data-design-idea], [data-design-people], [data-design-notes]") || [];
 
     saveButton?.addEventListener("click", () => saveCurrentView(point));
     fields.forEach((field) => field.addEventListener("input", () => syncGeneratorPrompt(point)));
@@ -362,8 +385,8 @@ function setupPhotoMap() {
           <div class="sphere-viewer main-sphere-viewer" data-sphere-stage aria-label="${point.title} interactive 360 viewer"></div>
           <div class="viewer-toolbelt">
             <div class="pano-pipeline compact-pipeline">
-              <h4>View to image-generator concept</h4>
-              <p>Frame the site angle, save it as a PNG, attach that PNG to an image model, then paste the prompt. Keep the original photo linked beside any generated concept.</p>
+              <h4>Save the view, then shape the idea</h4>
+              <p>Frame the site angle, save it as a PNG, answer the questions, then copy a prompt that carries your words into the image model.</p>
               <div class="button-row">
                 <button class="button primary small-button" type="button" data-save-view>Save current view</button>
                 <a class="button ghost small-button" href="${point.pano}" download="${point.downloadName}">Download full 360</a>
@@ -371,10 +394,10 @@ function setupPhotoMap() {
               <p class="workflow-status" data-workflow-status>Loading the 360 viewer...</p>
             </div>
             <details class="prompt-drawer" open>
-              <summary>Concept prompt</summary>
+              <summary>Idea questions</summary>
               <form class="idea-prompt-form" data-prompt-form>
                 <label>
-                  <span>Focus</span>
+                  <span>Starting lane</span>
                   <select data-design-focus>
                     <option value="shade, seating and a calmer waiting area">Shade + seating</option>
                     <option value="safer pedestrian movement and clearer ferry queues">Movement + queues</option>
@@ -385,16 +408,24 @@ function setupPhotoMap() {
                   </select>
                 </label>
                 <label>
-                  <span>Idea to test</span>
-                  <textarea data-design-idea rows="3" placeholder="Example: add a lightweight shade canopy and seating line that keeps the sea view open and leaves service access clear."></textarea>
+                  <span>What catches your eye?</span>
+                  <textarea data-design-notice rows="2" placeholder="What do you notice in this view: heat, glare, queueing, trees, water, parking, welcome, confusion, beauty?"></textarea>
+                </label>
+                <label class="prompt-question-wide">
+                  <span>What would you like to try?</span>
+                  <textarea data-design-idea rows="3" placeholder="Say it your way. What would you add, remove, move, protect, test or make easier here?"></textarea>
+                </label>
+                <label>
+                  <span>Who should it help?</span>
+                  <textarea data-design-people rows="2" placeholder="Locals, Elders, kids, ferry workers, visitors, wildlife, people with prams, bikes, wheelchairs?"></textarea>
+                </label>
+                <label>
+                  <span>What must stay real?</span>
+                  <textarea data-design-notes rows="2" placeholder="Keep the real shoreline, paths, vegetation, ferry context and public evidence visible; mark new elements as concept overlays."></textarea>
                 </label>
                 <label class="prompt-output-label">
-                  <span>Prompt</span>
-                  <textarea data-generated-prompt rows="5" readonly></textarea>
-                </label>
-                <label class="honesty-notes-label">
-                  <span>Keep honest</span>
-                  <textarea data-design-notes rows="2" placeholder="Keep the real shoreline, paths, vegetation, ferry context and public evidence visible; mark new elements as concept overlays."></textarea>
+                  <span>AI prompt from your answers</span>
+                  <textarea data-generated-prompt rows="7" readonly></textarea>
                 </label>
                 <div class="button-row prompt-actions">
                   <button class="button ghost small-button" type="button" data-copy-prompt>Copy prompt</button>
