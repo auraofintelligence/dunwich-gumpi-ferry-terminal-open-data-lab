@@ -1038,14 +1038,35 @@ h3,
 
 .idea-workbench-panel {
   display: grid;
-  grid-template-columns: minmax(230px, .24fr) minmax(0, 1fr);
-  gap: 1rem;
+  grid-template-columns: 1fr;
+  gap: .85rem;
   padding: clamp(1rem, 1.6vw, 1.35rem);
   background: var(--deep);
   color: var(--white);
   border: 1px solid rgba(255, 255, 255, .16);
   border-radius: var(--radius);
   box-shadow: 0 28px 60px rgba(13, 51, 64, .18);
+}
+
+.compact-pipeline {
+  display: grid;
+  grid-template-columns: minmax(220px, .42fr) minmax(0, 1fr) auto minmax(190px, .42fr);
+  gap: .85rem;
+  align-items: center;
+}
+
+.compact-pipeline h4,
+.compact-pipeline p {
+  margin: 0;
+}
+
+.compact-pipeline .button-row {
+  justify-content: flex-start;
+  white-space: nowrap;
+}
+
+.compact-pipeline .workflow-status {
+  margin: 0;
 }
 
 .viewer-buttons {
@@ -1072,15 +1093,59 @@ h3,
   padding: 0;
   border: 0;
   background: transparent;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: .85rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .75rem;
+  align-items: start;
 }
 
-.idea-prompt-form .lane-select-label {
+.lane-fieldset {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: .72rem;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .08);
+}
+
+.lane-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: .45rem;
+}
+
+.idea-prompt-form .lane-check {
+  display: flex;
+  align-items: flex-start;
+  gap: .45rem;
+  min-height: 38px;
+  padding: .48rem .55rem;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .94);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.lane-check input {
+  flex: 0 0 auto;
+  margin-top: .16rem;
+  accent-color: var(--bay);
+}
+
+.idea-prompt-form .lane-check span {
+  font-family: "Atkinson Hyperlegible", Arial, sans-serif;
+  font-size: .74rem;
+  font-weight: 800;
+  line-height: 1.15;
+  text-transform: none;
+}
+
+.field-span-2 {
   grid-column: span 2;
 }
 
 .idea-prompt-form label span,
+.lane-fieldset legend,
 .raw-pano-details summary {
   font-family: "Nunito Sans", Arial, sans-serif;
   font-size: .72rem;
@@ -1104,18 +1169,20 @@ h3,
 }
 
 .idea-prompt-form .prompt-output-label,
-.idea-prompt-form .prompt-question-wide,
 .idea-prompt-form .honesty-notes-label,
-.idea-prompt-form .prompt-tip,
 .idea-prompt-form .button-row {
   grid-column: 1 / -1;
+}
+
+.idea-prompt-form .prompt-tip {
+  grid-column: span 3;
 }
 
 .prompt-tip {
   margin: -.25rem 0 .1rem;
   padding: .55rem .7rem;
   border: 1px solid rgba(255, 255, 255, .2);
-  border-left: 5px solid var(--gold);
+  border-left: 5px solid var(--sun);
   border-radius: var(--radius);
   background: rgba(255, 255, 255, .08);
   color: rgba(255, 255, 255, .82);
@@ -1431,8 +1498,24 @@ h3,
     grid-template-columns: 1fr;
   }
 
-  .idea-workbench-panel {
-    grid-template-columns: 1fr;
+  .compact-pipeline {
+    grid-template-columns: minmax(220px, .75fr) minmax(0, 1.25fr);
+  }
+
+  .compact-pipeline .button-row,
+  .compact-pipeline .workflow-status {
+    grid-column: span 1;
+  }
+
+  .prompt-drawer .idea-prompt-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lane-fieldset,
+  .extra-lane-label,
+  .idea-prompt-form .prompt-tip,
+  .field-span-2 {
+    grid-column: 1 / -1;
   }
 
   .evidence-map-column {
@@ -1498,11 +1581,37 @@ h3,
     grid-template-columns: 1fr;
   }
 
-  .idea-prompt-form .lane-select-label,
+  .compact-pipeline,
+  .lane-fieldset,
+  .extra-lane-label,
+  .field-span-2,
+  .idea-prompt-form .prompt-tip,
   .evidence-map-column .photo-preview,
   .evidence-map-column .download-panel,
   .evidence-map-column .thumb-drawer {
     grid-column: auto;
+  }
+
+  .compact-pipeline {
+    grid-template-columns: 1fr;
+  }
+
+  .compact-pipeline .button-row {
+    white-space: normal;
+  }
+
+  .lane-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .38rem;
+  }
+
+  .idea-prompt-form .lane-check {
+    min-height: 46px;
+    padding: .42rem;
+  }
+
+  .idea-prompt-form .lane-check span {
+    font-size: .66rem;
   }
 
   .pano-scroll img {
