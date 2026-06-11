@@ -578,13 +578,13 @@ h3,
 }
 
 .evidence-workspace-section {
-  width: min(1360px, calc(100% - 2.5rem));
+  width: min(1760px, calc(100% - 2.5rem));
 }
 
 .evidence-workspace {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 390px);
-  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
+  gap: clamp(1rem, 1.6vw, 1.5rem);
   align-items: start;
 }
 
@@ -1009,9 +1009,9 @@ h3,
 
 .viewer-toolbelt {
   display: grid;
-  grid-template-columns: minmax(230px, .78fr) minmax(0, 1.22fr);
-  gap: .85rem;
-  margin-top: .85rem;
+  grid-template-columns: minmax(270px, .42fr) minmax(0, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
   align-items: start;
 }
 
@@ -1064,8 +1064,8 @@ h3,
   padding: 0;
   border: 0;
   background: transparent;
-  grid-template-columns: minmax(170px, .55fr) minmax(0, 1fr);
-  gap: .7rem;
+  grid-template-columns: minmax(240px, .52fr) minmax(0, 1fr);
+  gap: .85rem;
 }
 
 .idea-prompt-form label span,
@@ -1094,13 +1094,29 @@ h3,
 .idea-prompt-form .prompt-output-label,
 .idea-prompt-form .prompt-question-wide,
 .idea-prompt-form .honesty-notes-label,
+.idea-prompt-form .prompt-tip,
 .idea-prompt-form .button-row {
   grid-column: 1 / -1;
 }
 
+.prompt-tip {
+  margin: -.25rem 0 .1rem;
+  padding: .55rem .7rem;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-left: 5px solid var(--gold);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .08);
+  color: rgba(255, 255, 255, .82);
+  font-size: .88rem;
+}
+
 .idea-prompt-form [readonly] {
-  min-height: 120px;
+  min-height: 220px;
   background: #f7fbf8;
+}
+
+.prompt-drawer [data-design-idea] {
+  min-height: 150px;
 }
 
 .prompt-actions {

@@ -12,6 +12,41 @@ const pages = [
 
 const currentPage = document.body.dataset.page || "home";
 
+const conceptDesignLanes = [
+  ["01 Passenger terminal + amenities", "passenger terminal building with ticket office and amenities"],
+  ["02 Sheltered canopy + waiting", "large sheltered canopy and outdoor waiting areas"],
+  ["03 Bus stop + shelter", "bus stop and shelter"],
+  ["04 Kiss 'n' ride + shelters", "kiss 'n' ride area and shelters"],
+  ["05 Bicycle enclosure", "bicycle enclosure"],
+  ["06 Ferry pontoon + gangway", "ferry pontoon and gangway"],
+  ["07 Public parking", "public parking"],
+  ["08 Bus layovers", "bus layovers and waiting areas"],
+  ["09 Pedestrian link to town", "pedestrian link to and from town"],
+  ["10 Coastal habitat restoration", "coastal habitat restoration zone"],
+  ["11 Relocated osprey roost", "relocated osprey roost"],
+  ["12 Existing barge ramps", "existing barge ramps"],
+  ["13 Barge queuing area", "barge queuing area"],
+  ["14 Existing barge ticket area", "existing barge ticket area"],
+  ["15 Existing amenities + bike rack", "existing amenities block and bicycle rack"],
+  ["16 Staff parking", "staff parking"],
+  ["17 Foreshore + Harold Walker Jetty", "improved foreshore area and connection to Harold Walker Jetty"]
+];
+
+function renderConceptLaneOptions() {
+  const options = conceptDesignLanes
+    .map(([label, value]) => `<option value="${value}">${label}</option>`)
+    .join("");
+
+  return `
+    <optgroup label="TMR concept design markers">
+      ${options}
+    </optgroup>
+    <optgroup label="Community extra">
+      <option value="another community idea not named in the current concept design">Add my own lane below</option>
+    </optgroup>
+  `;
+}
+
 function renderHeader() {
   const header = document.querySelector("[data-site-header]");
   if (!header) return;
@@ -218,29 +253,41 @@ function setupPhotoMap() {
   }
 
   function buildGeneratorPrompt(point) {
-    const focus = viewer?.querySelector("[data-design-focus]")?.value || "an open community design idea";
+    const focusSelect = viewer?.querySelector("[data-design-focus]");
+    const focus = focusSelect?.value || "an open community design idea";
+    const focusLabel = focusSelect?.selectedOptions?.[0]?.textContent.trim() || focus;
+    const extraLane = viewer?.querySelector("[data-design-extra]")?.value.trim() || "";
     const noticed = viewer?.querySelector("[data-design-notice]")?.value.trim() || "";
     const idea = viewer?.querySelector("[data-design-idea]")?.value.trim() || "";
     const people = viewer?.querySelector("[data-design-people]")?.value.trim() || "";
     const notes = viewer?.querySelector("[data-design-notes]")?.value.trim() || "";
-    const hasAnyAnswer = noticed || idea || people || notes;
+    const hasAnyAnswer = extraLane || noticed || idea || people || notes;
+    const customLaneSelected = focus === "another community idea not named in the current concept design";
+    const lane = extraLane
+      ? customLaneSelected
+        ? `${extraLane} lane`
+        : `${focus} lane, with an extra community lane called ${extraLane}`
+      : `${focus} lane`;
 
     if (!hasAnyAnswer) {
       return [
         `Use the attached saved view from ${point.title} as the real site reference.`,
-        "Before generating an image, ask me four quick questions:",
+        "Before generating an image, ask me five quick questions:",
         "1. What caught your eye in this exact view?",
-        "2. What would you change, add, remove, move or protect here?",
-        "3. Who should this help, and what should feel better for them?",
-        "4. What must stay recognisable from the real place?",
+        "2. Does one of the 17 concept-design markers fit, or would you name another lane?",
+        "3. What would you change, add, remove, move or protect here?",
+        "4. Who should this help, and what should feel better for them?",
+        "5. What must stay recognisable from the real place?",
         "After I answer, turn my words into a clearly labelled concept overlay for community discussion."
       ].join("\n");
     }
 
     return [
       `Use the attached saved view from ${point.title} as the real site reference.`,
-      `Help me visualise my own idea in the ${focus} lane.`,
+      `Help me visualise my own idea in the ${lane}.`,
       "My answers:",
+      `- Starting lane: ${focusLabel} - ${focus}`,
+      `- Extra lane or missing issue: ${responseOrQuestion(extraLane, "If this does not fit the current concept-design list, what lane name would you add?")}`,
       `- What I noticed: ${responseOrQuestion(noticed, "What caught your eye in this exact view?")}`,
       `- What I want to try: ${responseOrQuestion(idea, "What would you change, add, remove, move or protect here?")}`,
       `- Who it should help: ${responseOrQuestion(people, "Who should this help, and what should feel better for them?")}`,
@@ -337,7 +384,7 @@ function setupPhotoMap() {
     const saveButton = viewer?.querySelector("[data-save-view]");
     const copyButton = viewer?.querySelector("[data-copy-prompt]");
     const prompt = viewer?.querySelector("[data-generated-prompt]");
-    const fields = viewer?.querySelectorAll("[data-design-focus], [data-design-notice], [data-design-idea], [data-design-people], [data-design-notes]") || [];
+    const fields = viewer?.querySelectorAll("[data-design-focus], [data-design-extra], [data-design-notice], [data-design-idea], [data-design-people], [data-design-notes]") || [];
 
     saveButton?.addEventListener("click", () => saveCurrentView(point));
     fields.forEach((field) => field.addEventListener("input", () => syncGeneratorPrompt(point)));
@@ -399,14 +446,14 @@ function setupPhotoMap() {
                 <label>
                   <span>Starting lane</span>
                   <select data-design-focus>
-                    <option value="shade, seating and a calmer waiting area">Shade + seating</option>
-                    <option value="safer pedestrian movement and clearer ferry queues">Movement + queues</option>
-                    <option value="Gumpi arrival, culture and public welcome">Culture + arrival</option>
-                    <option value="wildlife-safe edges, planting and stormwater care">Ecology + edges</option>
-                    <option value="local enterprise, kiosks and event noticeboards">Local enterprise</option>
-                    <option value="maker-space prototype: modular rails, blocks or shelters">Maker prototype</option>
+                    ${renderConceptLaneOptions()}
                   </select>
                 </label>
+                <label>
+                  <span>Add another lane</span>
+                  <textarea data-design-extra rows="2" placeholder="If your idea does not fit the 17 numbered concept markers, name the missing lane here."></textarea>
+                </label>
+                <p class="prompt-tip">The starting lanes mirror the 17 numbered TMR concept-design markers. If your idea sits outside that list, add your own lane in this box.</p>
                 <label>
                   <span>What catches your eye?</span>
                   <textarea data-design-notice rows="2" placeholder="What do you notice in this view: heat, glare, queueing, trees, water, parking, welcome, confusion, beauty?"></textarea>
