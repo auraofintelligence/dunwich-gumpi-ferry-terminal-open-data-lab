@@ -354,6 +354,40 @@ h3,
   margin-top: 1rem;
 }
 
+.hero.page-hero {
+  width: 100%;
+  max-width: none;
+  min-height: min(620px, calc(100vh - 72px));
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 0;
+  grid-template-columns: none;
+}
+
+.hero.page-hero .hero-copy {
+  width: min(860px, calc(100% - 2rem));
+}
+
+.hero.page-hero .hero-copy h1 {
+  font-size: clamp(2.7rem, 6vw, 6.3rem);
+}
+
+.hero.page-hero .hero-lede {
+  color: rgba(255, 255, 255, .92);
+}
+
+.hero.page-hero .section-label {
+  color: var(--sun);
+}
+
+.hero-caption {
+  max-width: 700px;
+  margin: .95rem 0 0;
+  color: rgba(255, 255, 255, .78);
+  font-size: .94rem;
+}
+
 .section-heading {
   display: grid;
   gap: .8rem;
@@ -609,6 +643,14 @@ h3,
 }
 
 .community-example-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.rodney-process-note {
+  margin-bottom: 1rem;
+}
+
+.rodney-process-note p:last-child {
   margin-bottom: 0;
 }
 
