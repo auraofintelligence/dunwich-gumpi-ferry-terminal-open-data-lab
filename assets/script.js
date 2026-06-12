@@ -1,6 +1,7 @@
 const pages = [
   ["home", "Home", "index.html"],
   ["map", "Evidence Map", "evidence-map.html"],
+  ["examples", "Examples", "community-genai-examples.html"],
   ["official", "Official Trail", "official-trail.html"],
   ["spectrum", "Design Spectrum", "design-spectrum.html"],
   ["simulate", "Simulate", "simulation-workflows.html"],

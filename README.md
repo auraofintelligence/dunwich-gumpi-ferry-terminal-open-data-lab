@@ -14,6 +14,7 @@ Source repo target:
 
 - `index.html` - public landing page
 - `evidence-map.html` - interactive 360-photo map
+- `community-genai-examples.html` - credited community GenAI concept image examples
 - `official-trail.html` - official source-backed project facts
 - `design-spectrum.html` - simulation lanes and review boundaries
 - `simulation-workflows.html` - evidence, design, simulate, review, share loop
