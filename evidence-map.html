@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Nunito+Sans:wght@700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
-    <link rel="stylesheet" href="assets/styles.css?v=20260612-full-heroes">
+    <link rel="stylesheet" href="assets/styles.css?v=20260619-satellite-map">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   </head>
   <body data-page="map">
@@ -30,14 +30,14 @@
         <div class="section-heading">
           <span class="section-label">360 evidence workbench</span>
           <h2 id="map-title">Pick a GPS point, look around, save the view.</h2>
-          <p>The map is schematic and the GPS has been rounded. Use it to choose a public photo point, inspect the 360 view, save a normal-looking angle, then pair that saved image with a labelled concept prompt.</p>
+          <p>The map uses a supplied satellite screenshot with rounded GoPro GPS points over the ferry terminal site. Use it to choose a public photo point, inspect the 360 view, save a normal-looking angle, then pair that saved image with a labelled concept prompt.</p>
           <p class="compat-note">The 360 viewer needs WebGL. It should work in current Chrome, Edge, Firefox and Safari, but some older laptops, older operating systems, locked-down browsers or disabled hardware acceleration may show only the fallback. If that happens, use the thumbnail, raw panorama strip or downloads instead.</p>
         </div>
         <div class="evidence-workspace">
           <div data-pano-viewer aria-label="Selected 360 panorama workbench"></div>
           <aside class="evidence-map-column" aria-label="GPS map and selected photo controls">
             <div class="map-panel compact-map-panel">
-              <div class="map-canvas evidence-map-canvas" data-photo-map aria-label="Schematic map of rounded 360 photo points"></div>
+              <div class="map-canvas evidence-map-canvas" data-photo-map aria-label="Satellite map screenshot with rounded 360 photo points"></div>
             </div>
             <div class="photo-preview" data-photo-preview></div>
             <details class="download-panel compact-disclosure" data-download-panel>
@@ -66,6 +66,6 @@
     <button class="to-top" type="button" data-to-top aria-label="Back to top">Top</button>
     <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <script src="assets/photo-data.js"></script>
-    <script src="assets/script.js?v=20260611-checkbox-repair"></script>
+    <script src="assets/script.js?v=20260619-satellite-map"></script>
   </body>
 </html>

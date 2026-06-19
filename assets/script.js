@@ -155,47 +155,27 @@ function setupPhotoMap() {
   const maxLat = Math.max(...lats);
   const minLon = Math.min(...lons);
   const maxLon = Math.max(...lons);
+  const mapFit = {
+    left: 44,
+    right: 80,
+    top: 18,
+    bottom: 74
+  };
   let activeId = points[0].id;
   const selectedIds = new Set();
   let sphereViewer = null;
 
   function project(point) {
-    const x = 12 + ((point.lon - minLon) / Math.max(maxLon - minLon, .00001)) * 76;
-    const y = 86 - ((point.lat - minLat) / Math.max(maxLat - minLat, .00001)) * 70;
+    const x = mapFit.left + ((point.lon - minLon) / Math.max(maxLon - minLon, .00001)) * (mapFit.right - mapFit.left);
+    const y = mapFit.bottom - ((point.lat - minLat) / Math.max(maxLat - minLat, .00001)) * (mapFit.bottom - mapFit.top);
     return { x, y };
   }
 
-  function clamp(value, min, max) {
-    return Math.min(max, Math.max(min, value));
-  }
-
-  function spreadMapPoints() {
-    const placed = [];
-    const minDistance = 7.2;
-
-    return points.map((point, index) => {
-      const base = project(point);
-      let position = base;
-
-      for (let attempt = 0; attempt < 64; attempt += 1) {
-        const ring = Math.ceil(attempt / 8);
-        const radius = attempt === 0 ? 0 : ring * 4.2;
-        const angle = ((attempt % 8) / 8) * Math.PI * 2 + (index % 3) * .24;
-        const candidate = {
-          x: clamp(base.x + Math.cos(angle) * radius, 8, 92),
-          y: clamp(base.y + Math.sin(angle) * radius, 10, 90)
-        };
-        const clear = placed.every((existing) => Math.hypot(candidate.x - existing.x, candidate.y - existing.y) >= minDistance);
-
-        if (clear) {
-          position = candidate;
-          break;
-        }
-      }
-
-      placed.push(position);
-      return { point, position };
-    });
+  function mapPointZone(point) {
+    if (point.sequence >= 11 && point.sequence <= 14) return "map-zone-water";
+    if (point.sequence >= 15 && point.sequence <= 25) return "map-zone-road";
+    if (point.sequence >= 26) return "map-zone-foreshore";
+    return "map-zone-terminal";
   }
 
   function downloadFile(url, filename) {
@@ -539,10 +519,10 @@ function setupPhotoMap() {
     });
   }
 
-  spreadMapPoints().forEach(({ point, position }, index) => {
-    const { x, y } = position;
+  points.forEach((point, index) => {
+    const { x, y } = project(point);
     const marker = document.createElement("button");
-    marker.className = "map-point";
+    marker.className = `map-point ${mapPointZone(point)}`;
     marker.type = "button";
     marker.dataset.photoId = point.id;
     marker.style.left = `${x}%`;
