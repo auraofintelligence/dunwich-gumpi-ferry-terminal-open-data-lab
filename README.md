@@ -14,7 +14,7 @@ Each link below reflects an evidenced family, lineage or direct connection. This
 
 ### Aura Systems Image Atlas source projects
 
-- [aura-systems-image-atlas](https://github.com/auraofintelligence/aura-systems-image-atlas) - [public page](https://auraofintelligence.github.io/aura-systems-image-atlas/) - source project represented in this visual atlas, source project represented in visual atlas.
+- [aura-systems-image-atlas](https://github.com/auraofintelligence/aura-systems-image-atlas) - [public page](https://auraofintelligence.github.io/aura-systems-image-atlas/) - source project represented in this visual atlas.
 - [ballow-road-sand-screen-hub](https://github.com/auraofintelligence/ballow-road-sand-screen-hub) - [public page](https://auraofintelligence.github.io/ballow-road-sand-screen-hub/) - explicit cross-reference, shared community programme.
 - [civilisation-of-sand](https://github.com/auraofintelligence/civilisation-of-sand) - [public page](https://auraofintelligence.github.io/civilisation-of-sand/) - shared community programme.
 
